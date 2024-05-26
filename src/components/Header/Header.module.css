@@ -1,0 +1,30 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  width: 100vw;
+  height: 68px;
+  background-color: var(--background-primary);
+}
+
+.authPageHeader {
+  background-color: var(--background-secondary);
+}
+
+.menuButton {
+  background-color: transparent;
+  transition: all var(--transition-main);
+}
+
+.menuButton svg {
+  transition: stroke var(--transition-main);
+}
+
+.menuButton:hover svg {
+  stroke: var(--accent-primary);
+}
+
+.userMenuBlock {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

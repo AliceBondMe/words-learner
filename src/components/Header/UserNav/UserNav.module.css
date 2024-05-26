@@ -1,0 +1,36 @@
+.navigation {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+
+  @media screen and (min-width: 1440px) {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.navLink {
+  color: var(--text-contrast);
+  font-size: 14px;
+  font-weight: 500;
+  transition: all var(--transition-main);
+
+  @media screen and (min-width: 1440px) {
+    color: var(--text-primary);
+  }
+}
+
+.navLink.active,
+.navLink:hover {
+  color: var(--text-primary);
+  padding: 12px 20px;
+  height: 43px;
+  width: fit-content;
+  border-radius: 15px;
+  background-color: var(--text-contrast);
+
+  @media screen and (min-width: 1440px) {
+    color: var(--text-contrast);
+    background-color: var(--accent-primary);
+  }
+}

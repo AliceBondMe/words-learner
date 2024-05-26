@@ -1,0 +1,30 @@
+.container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  width: 185px;
+  height: 100vh;
+  background-color: var(--accent-primary);
+}
+
+.closeButton {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  background-color: transparent;
+  transition: transform var(--transition-main);
+}
+
+.closeButton:hover {
+  transform: rotate(180deg);
+}
+
+.menuHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 166px;
+}
