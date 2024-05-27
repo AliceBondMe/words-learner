@@ -1,0 +1,52 @@
+.logoutButton {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  margin-top: 28px;
+  background-color: transparent;
+  color: var(--text-contrast);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  transition: all var(--transition-main);
+
+  @media screen and (min-width: 1440px) {
+    margin-top: 0;
+    font-size: 16px;
+    color: var(--text-primary);
+  }
+}
+
+.logoutButton svg {
+  margin-top: -4px;
+  stroke: var(--text-contrast);
+  fill: transparent;
+  transition: stroke var(--transition-main);
+
+  @media screen and (min-width: 1440px) {
+    stroke: var(--text-primary);
+  }
+}
+
+.logoutButton:hover {
+  color: var(--text-primary);
+  padding: 12px 20px;
+  height: 43px;
+  width: fit-content;
+  border-radius: 15px;
+  background-color: var(--text-contrast);
+
+  @media screen and (min-width: 1440px) {
+    color: var(--text-contrast);
+    background-color: var(--accent-primary);
+  }
+}
+
+.logoutButton:hover svg {
+  stroke: var(--text-primary);
+
+  @media screen and (min-width: 1440px) {
+    stroke: var(--text-contrast);
+  }
+}

@@ -8,6 +8,14 @@
   width: 185px;
   height: 100vh;
   background-color: var(--accent-primary);
+  :global(.fadeInRight) {
+    animation: fadeInRight 500ms ease-in-out;
+  }
+
+  @media screen and (min-width: 768px) {
+    width: 300px;
+    padding: 20px 32px;
+  }
 }
 
 .closeButton {
@@ -27,4 +35,12 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 166px;
+}
+
+.imageContainer {
+  margin: auto -16px -16px -16px;
+
+  @media screen and (min-width: 768px) {
+    margin: auto -32px -20px -32px;
+  }
 }

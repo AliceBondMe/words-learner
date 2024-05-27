@@ -8,6 +8,7 @@ import styles from "./Header.module.css";
 import { MobileMenu } from "./MobileMenu/MobileMenu";
 import { UserBar } from "./UserBar/UserBar";
 import { useLocation } from "react-router";
+import { LogoutButton } from "./LogoutButton/LogoutButton";
 
 export const Header: FC = () => {
   const { pathname } = useLocation();
@@ -72,7 +73,13 @@ export const Header: FC = () => {
           </button>
         </div>
       ) : (
-        <UserNav />
+        <>
+          <UserNav />
+          <div className={styles.userMenuBlock}>
+            <UserBar />
+            <LogoutButton />
+          </div>
+        </>
       )}
       {isMobileMenulOpen && <MobileMenu closeMobileMenu={closeMobileMenu} />}
     </header>
