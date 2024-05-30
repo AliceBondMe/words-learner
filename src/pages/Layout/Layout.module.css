@@ -1,6 +1,5 @@
 .container {
   height: calc(100vh - 68px);
-  padding: 32px 16px;
   display: flex;
   flex-direction: column;
   align-items: center;

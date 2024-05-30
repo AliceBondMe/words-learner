@@ -9,6 +9,11 @@
   }
 }
 
+.navigationHome {
+  display: flex;
+  gap: 28px;
+}
+
 .navLink {
   color: var(--text-contrast);
   font-size: 14px;

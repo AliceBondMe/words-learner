@@ -5,4 +5,10 @@
   font-size: 18px;
   font-weight: 600;
   line-height: 1.33;
+  transition: all var(--transition-main);
+}
+
+.logo:hover {
+  color: var(--accent-primary);
+  text-shadow: 0 0 2px 10px var(--text-primary);
 }

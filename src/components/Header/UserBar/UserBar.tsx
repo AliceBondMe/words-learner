@@ -4,8 +4,12 @@ import { Icon } from "../../common/Icon/Icon";
 import { UserBarProps } from "./types";
 
 import styles from "./UserBar.module.css";
+import { useSelector } from "react-redux";
+import { selectUserName } from "../../../redux/auth/selectors";
 
 export const UserBar: FC<UserBarProps> = ({ isMobileMenu = false }) => {
+  const username = useSelector(selectUserName);
+
   return (
     <div className={styles.container}>
       <span
@@ -15,7 +19,7 @@ export const UserBar: FC<UserBarProps> = ({ isMobileMenu = false }) => {
             : `${styles.userName}`
         }
       >
-        UserName
+        {username}
       </span>
       <div
         className={

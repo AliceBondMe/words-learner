@@ -1,0 +1,32 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: var(--accent-primary);
+}
+
+.header {
+  width: 80%;
+  margin-bottom: 24px;
+  font-size: 24px;
+  color: var(--text-contrast);
+  text-align: center;
+
+  @media screen and (min-width: 768px) {
+    font-size: 36px;
+  }
+}
+
+.imageWrap {
+  display: flex;
+  justify-content: center;
+  width: 70%;
+  object-fit: cover;
+
+  @media screen and (min-width: 768px) {
+    width: 80%;
+  }
+}

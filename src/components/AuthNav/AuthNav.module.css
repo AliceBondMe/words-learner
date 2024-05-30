@@ -1,0 +1,27 @@
+.navigation {
+  display: flex;
+  gap: 28px;
+}
+
+.link {
+  width: 100px;
+  border-radius: 15px;
+  background-color: var(--text-contrast);
+  padding: 12px;
+  color: var(--text-primary);
+  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
+  transition: all var(--transition-main);
+
+  @media screen and (min-width: 1440px) {
+    width: 160px;
+    font-size: 20px;
+  }
+}
+
+.link:hover {
+  color: var(--text-contrast);
+  background-color: transparent;
+  outline: 2px solid var(--text-contrast);
+}

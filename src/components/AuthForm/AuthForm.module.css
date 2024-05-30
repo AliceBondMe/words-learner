@@ -1,0 +1,96 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.formHeader {
+  margin-bottom: 16px;
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 1.06;
+  letter-spacing: -0.6px;
+
+  @media screen and (min-width: 768px) {
+    margin-bottom: 20px;
+    font-size: 40px;
+    line-height: 1.2;
+  }
+}
+
+.formText {
+  margin-bottom: 16px;
+
+  @media screen and (min-width: 768px) {
+    margin-bottom: 32px;
+    font-size: 20px;
+  }
+}
+
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.input {
+  padding: 16px 18px;
+  width: 100%;
+  border-radius: 15px;
+  border: 1px solid var(--border);
+  background-color: transparent;
+  transition: border var(--transition-main);
+}
+
+.input::placeholder {
+  color: var(--text-primary);
+}
+
+.input:focus {
+  border-color: var(--accent-primary);
+}
+
+.inputInvalid {
+  border-color: var(--error);
+}
+
+.inputValid {
+  border-color: var(--success);
+}
+
+.errorMessage {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--error);
+  font-size: 12px;
+}
+
+.passwordContainer {
+  position: relative;
+}
+
+.showPasswordBtn {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  padding: 0;
+}
+
+.submitBtn {
+  width: 100%;
+  padding: 16px;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  border-radius: 30px;
+  background-color: var(--accent-primary);
+  color: var(--text-contrast);
+  font-size: 18px;
+  font-weight: 700;
+  transition: background-color var(--transition-main);
+}
+
+.submitBtn:hover {
+  background-color: var(--accent-secondary);
+}

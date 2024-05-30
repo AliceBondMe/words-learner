@@ -1,0 +1,11 @@
+.imageContainer {
+  width: 247px;
+  height: 191px;
+  object-fit: cover;
+  margin: 0 auto 8px auto;
+
+  @media screen and (min-width: 1440px) {
+    width: 498px;
+    height: 435px;
+  }
+}

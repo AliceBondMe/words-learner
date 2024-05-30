@@ -9,12 +9,16 @@ import { MobileMenu } from "./MobileMenu/MobileMenu";
 import { UserBar } from "./UserBar/UserBar";
 import { useLocation } from "react-router";
 import { LogoutButton } from "./LogoutButton/LogoutButton";
+import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectIsLoggedIn } from "../../redux/auth/selectors";
 
 export const Header: FC = () => {
   const { pathname } = useLocation();
   const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth < 1440);
   const [isMobileMenulOpen, setIsMobileMenulOpen] = useState(false);
   const [isAuthPage, setIsAuthPage] = useState(false);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
 
   const handleResize = () => {
     window.innerWidth < 1440 ? setIsMobile(true) : setIsMobile(false);
@@ -54,8 +58,11 @@ export const Header: FC = () => {
           : `${styles.header}`
       }
     >
-      <Logo />
-      {isMobile ? (
+      <NavLink to="/">
+        <Logo />
+      </NavLink>
+
+      {isLoggedIn && isMobile ? (
         <div className={styles.userMenuBlock}>
           <UserBar />
           <button
@@ -74,14 +81,20 @@ export const Header: FC = () => {
         </div>
       ) : (
         <>
-          <UserNav />
-          <div className={styles.userMenuBlock}>
-            <UserBar />
-            <LogoutButton />
-          </div>
+          {isLoggedIn && (
+            <>
+              <UserNav />
+              <div className={styles.userMenuBlock}>
+                <UserBar />
+                <LogoutButton />
+              </div>
+            </>
+          )}
         </>
       )}
-      {isMobileMenulOpen && <MobileMenu closeMobileMenu={closeMobileMenu} />}
+      {isLoggedIn && isMobileMenulOpen && (
+        <MobileMenu closeMobileMenu={closeMobileMenu} />
+      )}
     </header>
   );
 };
