@@ -1,19 +1,19 @@
 import { FC, useEffect, useState } from "react";
-
-import { Logo } from "./Logo/Logo";
-import { UserNav } from "./UserNav/UserNav";
-import { Icon } from "../common/Icon/Icon";
-
-import styles from "./Header.module.css";
-import { MobileMenu } from "./MobileMenu/MobileMenu";
-import { UserBar } from "./UserBar/UserBar";
 import { useLocation } from "react-router";
-import { LogoutButton } from "./LogoutButton/LogoutButton";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { selectIsLoggedIn } from "../../redux/auth/selectors";
 
-export const Header: FC = () => {
+import { selectIsLoggedIn } from "../../redux/auth/selectors";
+import { Icon } from "../common";
+import Logo from "./Logo/Logo";
+import UserBar from "./UserBar/UserBar";
+import UserNav from "./UserNav/UserNav";
+import LogoutButton from "./LogoutButton/LogoutButton";
+import MobileMenu from "./MobileMenu/MobileMenu";
+
+import styles from "./Header.module.css";
+
+const Header: FC = () => {
   const { pathname } = useLocation();
   const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth < 1440);
   const [isMobileMenulOpen, setIsMobileMenulOpen] = useState(false);
@@ -98,3 +98,5 @@ export const Header: FC = () => {
     </header>
   );
 };
+
+export default Header;

@@ -8,7 +8,7 @@ import auth_mob_2x from "../../assets/images/home-2x.png";
 import styles from "./AuthPicture.module.css";
 import { useIsTablet } from "../../hooks/useIsTablet";
 
-export const AuthPicture: FC = () => {
+const AuthPicture: FC = () => {
   const { isTablet } = useIsTablet();
 
   return (
@@ -31,3 +31,5 @@ export const AuthPicture: FC = () => {
     </>
   );
 };
+
+export default AuthPicture;

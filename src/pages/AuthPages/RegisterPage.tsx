@@ -1,9 +1,8 @@
 import { FC } from "react";
 import { Link } from "react-router-dom";
 
-import { AuthForm } from "../../components/AuthForm/AuthForm";
-import { AuthPicture } from "../../components/AuthPicture/AuthPicture";
 import { useIsNotMobile } from "../../hooks/useIsNotMobile";
+import { AuthForm, AuthPicture } from "../../components";
 
 import styles from "./AuthPages.module.css";
 

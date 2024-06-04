@@ -1,11 +1,12 @@
 import { FC } from "react";
 import { createPortal } from "react-dom";
 
-import { UserNav } from "../UserNav/UserNav";
-import { Icon } from "../../common/Icon/Icon";
-import { UserBar } from "../UserBar/UserBar";
 import { MobileMenuProps } from "./types";
-import { LogoutButton } from "../LogoutButton/LogoutButton";
+import { Icon } from "../../common";
+import LogoutButton from "../LogoutButton/LogoutButton";
+import UserBar from "../UserBar/UserBar";
+import UserNav from "../UserNav/UserNav";
+
 import menu from "../../../assets/images/menu.png";
 import menu_2x from "../../../assets/images/menu-2x.png";
 import menu_tablet from "../../../assets/images/menu-tablet.png";
@@ -15,7 +16,7 @@ import styles from "./MobileMenu.module.css";
 
 const modalRoot = document.querySelector("#modal-root");
 
-export const MobileMenu: FC<MobileMenuProps> = ({ closeMobileMenu }) => {
+const MobileMenu: FC<MobileMenuProps> = ({ closeMobileMenu }) => {
   return createPortal(
     <div className={`${styles.container} fadeInRight`}>
       <div className={styles.menuHeader}>
@@ -55,3 +56,5 @@ export const MobileMenu: FC<MobileMenuProps> = ({ closeMobileMenu }) => {
     modalRoot as HTMLElement
   );
 };
+
+export default MobileMenu;

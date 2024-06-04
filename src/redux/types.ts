@@ -27,3 +27,19 @@ export interface AuthResponse {
 export interface LogoutResponse {
   message: string;
 }
+
+export interface AllWordsResponse {
+  results: {
+    _id: string;
+    en: string;
+    ua: string;
+    category: string;
+    isIrregular: boolean;
+  }[];
+  totalPages: number;
+}
+
+export interface WordsState {
+  recommended: AllWordsResponse;
+  wordsError: ErrorResponse | null | undefined;
+}

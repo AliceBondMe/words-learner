@@ -11,6 +11,7 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import { wordsReducer } from "./words/wordsSlice";
 
 export const persistConfig = {
   key: "auth",
@@ -22,11 +23,13 @@ const persistedReducer = persistReducer(persistConfig, authReducer);
 
 const rootReducer = combineReducers({
   auth: authReducer,
+  words: wordsReducer,
 });
 
 export const store = configureStore({
   reducer: {
     auth: persistedReducer,
+    words: wordsReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

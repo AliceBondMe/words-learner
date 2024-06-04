@@ -1,10 +1,10 @@
 import { FC } from "react";
 
-import { Icon } from "../../common/Icon/Icon";
+import { Icon } from "../../common";
 
 import styles from "./Logo.module.css";
 
-export const Logo: FC = () => {
+const Logo: FC = () => {
   return (
     <div className={styles.logo}>
       <Icon
@@ -17,3 +17,5 @@ export const Logo: FC = () => {
     </div>
   );
 };
+
+export default Logo;

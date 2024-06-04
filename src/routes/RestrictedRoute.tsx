@@ -4,7 +4,7 @@ import { Navigate } from "react-router-dom";
 import { RouteProps } from "./types";
 import { selectIsLoggedIn } from "../redux/auth/selectors";
 
-export const RestrictedRoute: FC<RouteProps> = ({
+const RestrictedRoute: FC<RouteProps> = ({
   component: Component,
   redirectTo = "/",
 }): ReactElement => {
@@ -12,3 +12,5 @@ export const RestrictedRoute: FC<RouteProps> = ({
 
   return isLoggedIn ? <Navigate to={redirectTo} /> : Component;
 };
+
+export default RestrictedRoute;

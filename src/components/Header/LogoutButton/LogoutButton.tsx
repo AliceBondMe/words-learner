@@ -1,13 +1,13 @@
 import { FC } from "react";
 
-import { Icon } from "../../common/Icon/Icon";
-
-import styles from "./LogoutButton.module.css";
 import { AppDispatch } from "../../../redux/store";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "../../../redux/auth/operations";
+import { Icon } from "../../common";
 
-export const LogoutButton: FC = () => {
+import styles from "./LogoutButton.module.css";
+
+const LogoutButton: FC = () => {
   const dispatch: AppDispatch = useDispatch();
 
   const handleLogout = () => {
@@ -25,3 +25,5 @@ export const LogoutButton: FC = () => {
     </button>
   );
 };
+
+export default LogoutButton;

@@ -3,12 +3,11 @@ import { Route, Routes } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 
 import Layout from "./pages/Layout/Layout";
-import { Loader } from "./components/common/Loader/Loader";
+import { Loader } from "./components/common";
 import { selectIsRefreshing } from "./redux/auth/selectors";
 import { refreshUser } from "./redux/auth/operations";
 import { AppDispatch } from "./redux/store";
-import { RestrictedRoute } from "./routes/RestrictedRoute";
-import { PrivateRoute } from "./routes/PrivateRoute";
+import { PrivateRoute, RestrictedRoute } from "./routes";
 
 const HomePage: LazyExoticComponent<ComponentType> = lazy(
   () => import("./pages/HomePage/HomePage")

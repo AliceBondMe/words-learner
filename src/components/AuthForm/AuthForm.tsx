@@ -4,20 +4,20 @@ import { useLocation, useNavigate } from "react-router";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../redux/store";
+import { MdError } from "react-icons/md";
 
 import { UserData } from "./types";
 import {
   validationSchemaSignin,
   validationSchemaSignup,
 } from "./validationSchema";
-import { Icon } from "../common/Icon/Icon";
-import { MdError } from "react-icons/md";
+import { Icon } from "../common";
 import { loginUser, registerUser } from "../../redux/auth/operations";
-
-import styles from "./AuthForm.module.css";
 import { selectAuthError } from "../../redux/auth/selectors";
 
-export const AuthForm: FC = () => {
+import styles from "./AuthForm.module.css";
+
+const AuthForm: FC = () => {
   const { pathname } = useLocation();
   const [isShowPassword, setIsShowPassword] = useState(false);
   const dispatch: AppDispatch = useDispatch();
@@ -155,3 +155,5 @@ export const AuthForm: FC = () => {
     </div>
   );
 };
+
+export default AuthForm;

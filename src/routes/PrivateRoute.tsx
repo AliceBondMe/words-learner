@@ -4,7 +4,7 @@ import { Navigate } from "react-router-dom";
 import { RouteProps } from "./types";
 import { selectIsLoggedIn, selectIsRefreshing } from "../redux/auth/selectors";
 
-export const PrivateRoute: FC<RouteProps> = ({
+const PrivateRoute: FC<RouteProps> = ({
   component: Component,
   redirectTo = "/",
 }): ReactElement => {
@@ -14,3 +14,5 @@ export const PrivateRoute: FC<RouteProps> = ({
 
   return notAuthorised ? <Navigate to={redirectTo} /> : Component;
 };
+
+export default PrivateRoute;

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import styles from "./AuthNav.module.css";
 
-export const AuthNav: FC = () => {
+const AuthNav: FC = () => {
   return (
     <nav className={styles.navigation}>
       <Link to="register" className={styles.link}>
@@ -16,3 +16,5 @@ export const AuthNav: FC = () => {
     </nav>
   );
 };
+
+export default AuthNav;

@@ -1,8 +1,7 @@
 import { FC } from "react";
 import { Link } from "react-router-dom";
 
-import { AuthPicture } from "../../components/AuthPicture/AuthPicture";
-import { AuthForm } from "../../components/AuthForm/AuthForm";
+import { AuthForm, AuthPicture } from "../../components";
 
 import styles from "./AuthPages.module.css";
 

@@ -1,8 +1,8 @@
 import { FC, Suspense } from "react";
-
-import { Header } from "../../components/Header/Header";
 import { Outlet } from "react-router";
-import { Loader } from "../../components/common/Loader/Loader";
+
+import { Header } from "../../components";
+import { Loader } from "../../components/common";
 
 import styles from "./Layout.module.css";
 

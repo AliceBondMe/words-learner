@@ -6,7 +6,7 @@ import styles from "./UserNav.module.css";
 const getNavLinkClass = ({ isActive }: { isActive: boolean }) =>
   isActive ? `${styles.navLink} ${styles.active}` : styles.navLink;
 
-export const UserNav: FC = () => {
+const UserNav: FC = () => {
   return (
     <nav className={styles.navigation}>
       <NavLink to="dictionary" className={getNavLinkClass}>
@@ -23,3 +23,5 @@ export const UserNav: FC = () => {
     </nav>
   );
 };
+
+export default UserNav;

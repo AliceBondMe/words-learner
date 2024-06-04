@@ -1,12 +1,13 @@
 import { FC } from "react";
 
+import { AuthNav } from "../../components";
+
 import home_desc from "../../assets/images/main-desctop.png";
 import home_desc_2x from "../../assets/images/main-desctop-2x.png";
 import home_mob from "../../assets/images/main-mob.png";
 import home_mob_2x from "../../assets/images/main-mob-2x.png";
 
 import styles from "./HomePage.module.css";
-import { AuthNav } from "../../components/AuthNav/AuthNav";
 
 const HomePage: FC = () => {
   return (
