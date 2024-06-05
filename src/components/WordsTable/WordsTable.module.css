@@ -1,0 +1,80 @@
+.table {
+  border-collapse: collapse;
+  margin-bottom: 32px;
+}
+
+.th {
+  max-width: 25vw;
+  background-color: var(--background-form);
+  font-weight: 500;
+  padding: 16px;
+  word-wrap: break-word;
+
+  @media screen and (min-width: 768px) {
+    min-width: 180px;
+  }
+}
+
+.th:nth-child(3) {
+  @media screen and (min-width: 768px) {
+    min-width: 160px;
+  }
+}
+
+.th:last-child {
+  @media screen and (min-width: 768px) {
+    min-width: 148px;
+  }
+}
+
+.th:not(:last-child),
+.td:not(:last-child) {
+  border-right: 1px solid var(--background-tertiary);
+}
+
+.thLeft {
+  border-radius: 8px 0px 0px 0px;
+}
+
+.thRight {
+  border-radius: 0px 8px 0px 0px;
+}
+
+.tdLeft {
+  border-radius: 0px 0px 0px 8px;
+}
+
+.tdRight {
+  border-radius: 0px 0px 8px 0px;
+}
+
+.td {
+  max-width: 25vw;
+  padding: 16px;
+  background-color: var(--text-contrast);
+  border-top: 1px solid var(--background-tertiary);
+  word-wrap: break-word;
+}
+
+.button {
+  background-color: transparent;
+  transition: transform var(--transition-main), color var(--transition-main);
+
+  @media screen and (min-width: 768px) {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.button:hover {
+  transform: translateX(5px);
+  color: var(--accent-primary);
+}
+
+.headWithIcon {
+  @media screen and (min-width: 768px) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}

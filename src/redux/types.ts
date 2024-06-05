@@ -28,6 +28,13 @@ export interface LogoutResponse {
   message: string;
 }
 
+export interface WordsRequestParams {
+  keyword?: string;
+  category?: string;
+  isIrregular?: boolean;
+  page?: number;
+}
+
 export interface AllWordsResponse {
   results: {
     _id: string;
