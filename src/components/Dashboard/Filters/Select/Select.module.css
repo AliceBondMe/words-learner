@@ -1,0 +1,67 @@
+.selectWrap {
+  position: relative;
+}
+
+.selectWrapOpt {
+  margin-bottom: 22px;
+
+  @media screen and (min-width: 768px) {
+    margin-bottom: 0;
+  }
+}
+
+.select {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 12px 24px;
+  border-radius: 15px;
+  border: 1px solid var(--border);
+  background-color: inherit;
+  font-weight: 500;
+  cursor: pointer;
+
+  @media screen and (min-width: 768px) {
+    min-width: 164px;
+    width: max-content;
+  }
+}
+
+.select svg {
+  @media screen and (min-width: 768px) {
+    margin-left: 8px;
+  }
+}
+
+.selectActive {
+  border: 1px solid var(--accent-primary);
+}
+
+.selectActive svg {
+  color: var(--accent-primary);
+}
+
+.optionsWrap {
+  position: absolute;
+  top: 50px;
+  width: 100%;
+  padding: 12px 24px;
+  border-radius: 15px;
+  border: 1px solid var(--accent-primary);
+  background-color: var(--background-secondary);
+
+  @media screen and (min-width: 768px) {
+    width: max-content;
+  }
+}
+
+.option {
+  padding: 4px;
+  cursor: pointer;
+  transition: color var(--transition-main);
+}
+
+.option:hover {
+  color: var(--accent-primary);
+}

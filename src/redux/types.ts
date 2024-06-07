@@ -47,6 +47,7 @@ export interface AllWordsResponse {
 }
 
 export interface WordsState {
+  categories: string[];
   recommended: AllWordsResponse;
   wordsError: ErrorResponse | null | undefined;
 }

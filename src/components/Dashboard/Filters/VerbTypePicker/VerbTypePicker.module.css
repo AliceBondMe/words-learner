@@ -1,0 +1,35 @@
+.container {
+  display: flex;
+  gap: 16px;
+}
+
+.radioWrap {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.label {
+  font-size: 12px;
+  padding-top: 4px;
+
+  @media screen and (min-width: 768x) {
+    font-size: 14px;
+  }
+}
+
+.radio {
+  width: 18px;
+  height: 18px;
+  border-radius: 10px;
+  border: 2px solid var(--border-thicker);
+  appearance: none;
+}
+
+.radio:checked {
+  background: radial-gradient(
+    var(--accent-primary) 40%,
+    var(--background-secondary) 50%
+  );
+  border-color: var(--accent-primary);
+}

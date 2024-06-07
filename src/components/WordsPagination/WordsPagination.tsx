@@ -19,7 +19,9 @@ const WordsPagination: FC<WordsPaginationProps> = ({ totalPages }) => {
   const handlePageClick = (event: ChangeEvent<unknown>, value: number) => {
     console.log(event);
     setCurrentPage(value);
-    setSearchParams({ page: String(value) });
+    const params = new URLSearchParams(searchParams);
+    params.set("page", String(value));
+    setSearchParams(params);
   };
 
   return (

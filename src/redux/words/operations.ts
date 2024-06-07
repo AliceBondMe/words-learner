@@ -3,6 +3,25 @@ import axios from "axios";
 
 import { AllWordsResponse, ErrorResponse, WordsRequestParams } from "../types";
 
+export const getCategories = createAsyncThunk<
+  string[],
+  void,
+  { rejectValue: ErrorResponse }
+>("words/getCategories", async (_, thunkAPI) => {
+  try {
+    const response = await axios.get<string[]>("/words/categories");
+    return response.data;
+  } catch (error) {
+    let errorMessage = "An unknown error occurred";
+    if (axios.isAxiosError(error) && error.response) {
+      errorMessage = error.response.data.message || error.message;
+    } else if (error instanceof Error) {
+      errorMessage = error.message;
+    }
+    return thunkAPI.rejectWithValue({ message: errorMessage });
+  }
+});
+
 export const getRecommendedWords = createAsyncThunk<
   AllWordsResponse,
   WordsRequestParams,

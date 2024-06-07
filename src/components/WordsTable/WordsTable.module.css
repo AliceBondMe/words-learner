@@ -1,6 +1,16 @@
+.tableWrapper {
+  margin-bottom: 32px;
+
+  @media screen and (min-width: 768px) {
+    padding: 18px;
+    background-color: var(--background-primary);
+    border-radius: 15px;
+    margin-bottom: 28px;
+  }
+}
+
 .table {
   border-collapse: collapse;
-  margin-bottom: 32px;
 }
 
 .th {

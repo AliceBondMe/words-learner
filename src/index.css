@@ -43,6 +43,7 @@
   --error: #d80027;
   --success: #3cbf61;
   --border: rgba(18, 20, 23, 0.1);
+  --border-thicker: rgba(18, 20, 23, 0.2);
   --backdrop: rgba(17, 18, 19, 0.4);
   --transition-main: 300ms ease-in-out;
 }

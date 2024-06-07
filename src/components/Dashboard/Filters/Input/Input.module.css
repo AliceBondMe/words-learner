@@ -1,0 +1,41 @@
+.inputWrap {
+  width: 100%;
+  position: relative;
+
+  @media screen and (min-width: 768px) {
+    width: 446px;
+  }
+
+  @media screen and (min-width: 1440px) {
+    width: 274px;
+  }
+}
+
+.input {
+  width: 100%;
+  padding: 12px 24px;
+  border-radius: 15px;
+  border: 1px solid var(--border);
+  background-color: inherit;
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+.input:focus {
+  border: 1px solid var(--accent-primary);
+}
+
+.input::placeholder {
+  color: var(--text-primary);
+}
+
+.input:focus + svg {
+  stroke: var(--accent-primary);
+}
+
+.inputWrap svg {
+  position: absolute;
+  top: 14px;
+  right: 24px;
+}
