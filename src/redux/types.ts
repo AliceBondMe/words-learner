@@ -35,6 +35,19 @@ export interface WordsRequestParams {
   page?: number;
 }
 
+export interface OwnWordsResponse {
+  results: {
+    _id: string;
+    en: string;
+    ua: string;
+    category: string;
+    isIrregular: boolean;
+    owner: string;
+    progress: number;
+  }[];
+  totalPages: number;
+}
+
 export interface AllWordsResponse {
   results: {
     _id: string;
@@ -48,6 +61,24 @@ export interface AllWordsResponse {
 
 export interface WordsState {
   categories: string[];
+  dictionary: OwnWordsResponse;
   recommended: AllWordsResponse;
   wordsError: ErrorResponse | null | undefined;
+}
+
+export interface NewWordData {
+  en: string;
+  ua: string;
+  category: string;
+  isIrregular?: boolean;
+}
+
+export interface AddNewWordResponse {
+  _id: string;
+  en: string;
+  ua: string;
+  category: string;
+  isIrregular: boolean;
+  owner: string;
+  progress: number;
 }

@@ -1,0 +1,18 @@
+.button {
+  background-color: transparent;
+  transition: transform var(--transition-main), color var(--transition-main);
+
+  @media screen and (min-width: 768px) {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.button:not(:disabled):hover {
+  transform: translateX(5px);
+  color: var(--accent-primary);
+}
+
+.button:disabled svg {
+  stroke: var(--text-semitransparent);
+}

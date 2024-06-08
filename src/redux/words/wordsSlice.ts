@@ -1,9 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 import { WordsState } from "../types";
-import { getCategories, getRecommendedWords } from "./operations";
+import {
+  addNewWord,
+  addOthersWord,
+  getCategories,
+  getOwnWords,
+  getRecommendedWords,
+} from "./operations";
 
 const wordsInitialState: WordsState = {
+  dictionary: {
+    results: [],
+    totalPages: 0,
+  },
   categories: [],
   recommended: {
     results: [],
@@ -22,13 +32,33 @@ const wordsSlice = createSlice({
       state.recommended.totalPages = action.payload.totalPages;
       state.wordsError = null;
     });
+    builder.addCase(getOwnWords.fulfilled, (state, action) => {
+      state.dictionary.results = action.payload.results;
+      state.dictionary.totalPages = action.payload.totalPages;
+      state.wordsError = null;
+    });
     builder.addCase(getCategories.fulfilled, (state, action) => {
-      state.categories = ["all", ...action.payload];
+      state.categories = action.payload;
+    });
+    builder.addCase(addNewWord.fulfilled, (state, action) => {
+      state.dictionary.results.push(action.payload);
+    });
+    builder.addCase(addOthersWord.fulfilled, (state, action) => {
+      state.dictionary.results.push(action.payload);
     });
     builder.addCase(getRecommendedWords.rejected, (state, action) => {
       state.wordsError = action.payload;
     });
+    builder.addCase(getOwnWords.rejected, (state, action) => {
+      state.wordsError = action.payload;
+    });
     builder.addCase(getCategories.rejected, (state, action) => {
+      state.wordsError = action.payload;
+    });
+    builder.addCase(addNewWord.rejected, (state, action) => {
+      state.wordsError = action.payload;
+    });
+    builder.addCase(addOthersWord.rejected, (state, action) => {
       state.wordsError = action.payload;
     });
   },

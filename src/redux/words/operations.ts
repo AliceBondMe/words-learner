@@ -1,7 +1,14 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-import { AllWordsResponse, ErrorResponse, WordsRequestParams } from "../types";
+import {
+  AddNewWordResponse,
+  AllWordsResponse,
+  ErrorResponse,
+  NewWordData,
+  OwnWordsResponse,
+  WordsRequestParams,
+} from "../types";
 
 export const getCategories = createAsyncThunk<
   string[],
@@ -45,3 +52,70 @@ export const getRecommendedWords = createAsyncThunk<
     }
   }
 );
+
+export const getOwnWords = createAsyncThunk<
+  OwnWordsResponse,
+  WordsRequestParams,
+  { rejectValue: ErrorResponse }
+>(
+  "words/getOwnWords",
+  async (wordsRequestData: WordsRequestParams, thunkAPI) => {
+    try {
+      const response = await axios.get<OwnWordsResponse>("/words/own", {
+        params: wordsRequestData,
+      });
+      return response.data;
+    } catch (error) {
+      let errorMessage = "An unknown error occurred";
+      if (axios.isAxiosError(error) && error.response) {
+        errorMessage = error.response.data.message || error.message;
+      } else if (error instanceof Error) {
+        errorMessage = error.message;
+      }
+      return thunkAPI.rejectWithValue({ message: errorMessage });
+    }
+  }
+);
+
+export const addNewWord = createAsyncThunk<
+  AddNewWordResponse,
+  NewWordData,
+  { rejectValue: ErrorResponse }
+>("words/addNewWord", async (newWord: NewWordData, thunkAPI) => {
+  try {
+    const response = await axios.post<AddNewWordResponse>(
+      "/words/create",
+      newWord
+    );
+    return response.data;
+  } catch (error) {
+    let errorMessage = "An unknown error occurred";
+    if (axios.isAxiosError(error) && error.response) {
+      errorMessage = error.response.data.message || error.message;
+    } else if (error instanceof Error) {
+      errorMessage = error.message;
+    }
+    return thunkAPI.rejectWithValue({ message: errorMessage });
+  }
+});
+
+export const addOthersWord = createAsyncThunk<
+  AddNewWordResponse,
+  string,
+  { rejectValue: ErrorResponse }
+>("words/addOthersWord", async (wordId: string, thunkAPI) => {
+  try {
+    const response = await axios.post<AddNewWordResponse>(
+      `/words/add/${wordId}`
+    );
+    return response.data;
+  } catch (error) {
+    let errorMessage = "An unknown error occurred";
+    if (axios.isAxiosError(error) && error.response) {
+      errorMessage = error.response.data.message || error.message;
+    } else if (error instanceof Error) {
+      errorMessage = error.message;
+    }
+    return thunkAPI.rejectWithValue({ message: errorMessage });
+  }
+});

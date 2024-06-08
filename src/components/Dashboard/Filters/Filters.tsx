@@ -23,7 +23,7 @@ const Filters: FC = () => {
   return (
     <div className={styles.container}>
       <Input />
-      {options.length && <Select />}
+      {options.length > 0 && <Select />}
       {isVerb && <VerbTypePicker />}
     </div>
   );

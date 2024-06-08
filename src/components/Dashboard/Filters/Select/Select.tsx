@@ -58,7 +58,7 @@ const Select: FC = () => {
 
       {isOpen && (
         <div className={styles.optionsWrap}>
-          {options.map((item) => (
+          {["all", ...options].map((item) => (
             <div
               key={nanoid()}
               data-value={item}

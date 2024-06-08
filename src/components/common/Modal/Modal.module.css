@@ -1,0 +1,44 @@
+.backdrop {
+  z-index: 1200;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--backdrop);
+
+  :global(.fadeIn) {
+    animation: fadeIn 300ms ease-in-out;
+  }
+}
+
+.modalContainer {
+  position: relative;
+  padding: 48px 16px;
+  border-radius: 15px;
+  background-color: var(--accent-primary);
+  color: var(--text-contrast);
+
+  :global(.zoomIn) {
+    animation: zoomIn 500ms ease-in-out;
+  }
+}
+
+.closeButton {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background-color: transparent;
+  padding: 0;
+}
+
+.closeButton svg {
+  transition: transform var(--transition-main);
+}
+
+.closeButton:hover svg {
+  transform: rotate(180deg);
+}

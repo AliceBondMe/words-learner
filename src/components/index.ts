@@ -5,3 +5,5 @@ export { default as Header } from "./Header/Header";
 export { default as WordsTable } from "./WordsTable/WordsTable";
 export { default as WordsPagination } from "./WordsPagination/WordsPagination";
 export { default as Dashboard } from "./Dashboard/Dashboard";
+export { default as AddWordButton } from "./AddWordButton/AddWordButton";
+export { default as AddWordForm } from "./AddWordForm/AddWordForm";

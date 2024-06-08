@@ -3,6 +3,7 @@ import { FC } from "react";
 import { useIsNotMobile } from "../../hooks/useIsNotMobile";
 import { WordsTableProps } from "./types";
 import { Icon } from "../common";
+import AddOthersWordButton from "./AddOthersWordButton/AddOthersWordButton";
 
 import styles from "./WordsTable.module.css";
 
@@ -47,19 +48,7 @@ const WordsTable: FC<WordsTableProps> = ({ wordsList }) => {
                 <span>{category}</span>
               </td>
               <td className={`${styles.td} ${styles.tdRight}`}>
-                <button
-                  type="button"
-                  className={styles.button}
-                  aria-label="Add to dictionary"
-                >
-                  {isNotMobile && <span>Add to dictionary</span>}
-                  <Icon
-                    name="icon-arrow-right"
-                    width={20}
-                    height={20}
-                    stroke="var(--accent-primary)"
-                  />
-                </button>
+                <AddOthersWordButton wordId={_id} wordEn={en} />
               </td>
             </tr>
           ))}

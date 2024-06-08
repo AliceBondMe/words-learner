@@ -1,7 +1,32 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import { AppDispatch } from "../../redux/store";
+import { getCategories, getOwnWords } from "../../redux/words/operations";
+import { selectOwnWords } from "../../redux/words/selectors";
+import { useGetWordsSearchParams } from "../../hooks/useGetWordsSearchParams";
+import { Dashboard, WordsPagination, WordsTable } from "../../components";
 
 const DictionaryPage: FC = () => {
-  return <h2>DictionaryPage</h2>;
+  const dispatch: AppDispatch = useDispatch();
+  const { results: ownWords, totalPages } = useSelector(selectOwnWords);
+  const wordsSearchParams = useGetWordsSearchParams();
+
+  useEffect(() => {
+    dispatch(getCategories());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getOwnWords(wordsSearchParams));
+  }, [dispatch, wordsSearchParams]);
+
+  return (
+    <div>
+      <Dashboard />
+      <WordsTable wordsList={ownWords} />
+      {totalPages > 1 && <WordsPagination totalPages={totalPages} />}
+    </div>
+  );
 };
 
 export default DictionaryPage;
