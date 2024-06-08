@@ -60,6 +60,7 @@ export interface AllWordsResponse {
 }
 
 export interface WordsState {
+  wordToEdit: AddNewWordResponse | null;
   categories: string[];
   dictionary: OwnWordsResponse;
   recommended: AllWordsResponse;
@@ -81,4 +82,14 @@ export interface AddNewWordResponse {
   isIrregular: boolean;
   owner: string;
   progress: number;
+}
+
+export interface EditedWordData {
+  wordId: string;
+  editedWord: {
+    en: string;
+    ua: string;
+    category: string;
+    isIrregular: boolean;
+  };
 }

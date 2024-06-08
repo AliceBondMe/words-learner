@@ -73,3 +73,27 @@
     align-items: center;
   }
 }
+
+.progressWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media screen and (min-width: 768px) {
+    gap: 6px;
+  }
+
+  @media screen and (min-width: 1440px) {
+    gap: 16px;
+  }
+}
+
+.progressText {
+  font-weight: 500;
+  font-size: 18px;
+  margin-top: 4px;
+
+  @media screen and (min-width: 1440px) {
+    font-size: 22px;
+  }
+}

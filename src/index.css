@@ -42,6 +42,8 @@
   --text-semitransparent: rgba(18, 20, 23, 0.5);
   --error: #d80027;
   --success: #3cbf61;
+  --progressDark: #2bd627;
+  --progressLight: #d4f8d3;
   --border: rgba(18, 20, 23, 0.1);
   --border-thicker: rgba(18, 20, 23, 0.2);
   --border-modal: #d1d5db;

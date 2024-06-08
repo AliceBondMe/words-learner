@@ -6,9 +6,15 @@ import { Icon } from "../common";
 import AddOthersWordButton from "./AddOthersWordButton/AddOthersWordButton";
 
 import styles from "./WordsTable.module.css";
+import { useLocation } from "react-router";
+import ProgressBar from "../ProgressBar/ProgressBar";
+import ActionsButton from "./ActionsButton/ActionsButton";
 
 const WordsTable: FC<WordsTableProps> = ({ wordsList }) => {
+  const { pathname } = useLocation();
   const { isNotMobile } = useIsNotMobile();
+
+  const isDictionaryPage = pathname.includes("dictionary");
 
   return (
     <div className={styles.tableWrapper}>
@@ -32,23 +38,51 @@ const WordsTable: FC<WordsTableProps> = ({ wordsList }) => {
             <th className={styles.th}>
               <span>Category</span>
             </th>
+            {isDictionaryPage && (
+              <th className={styles.th}>
+                <span>Progress</span>
+              </th>
+            )}
             <th className={`${styles.th} ${styles.thRight}`}></th>
           </tr>
         </thead>
         <tbody>
-          {wordsList.map(({ _id, en, ua, category }) => (
-            <tr key={_id}>
+          {wordsList.map((word) => (
+            <tr key={word._id}>
               <td className={`${styles.td} ${styles.tdLeft}`}>
-                <span>{en}</span>
+                <span>{word.en}</span>
               </td>
               <td className={styles.td}>
-                <span>{ua}</span>
+                <span>{word.ua}</span>
               </td>
               <td className={styles.td}>
-                <span>{category}</span>
+                <span>{word.category}</span>
               </td>
+              {isDictionaryPage && (
+                <td className={styles.td}>
+                  <div className={styles.progressWrap}>
+                    {isNotMobile && (
+                      <span className={styles.progressText}>
+                        {Math.round(word.progress as number)}%
+                      </span>
+                    )}
+                    <ProgressBar
+                      progress={word.progress as number}
+                      color1="var(--progressDark)"
+                      color2="var(--progressLight)"
+                      thickness1={isNotMobile ? 9 : 8}
+                      thickness2={4}
+                      size={isNotMobile ? "26px" : "24px"}
+                    />
+                  </div>
+                </td>
+              )}
               <td className={`${styles.td} ${styles.tdRight}`}>
-                <AddOthersWordButton wordId={_id} wordEn={en} />
+                {isDictionaryPage ? (
+                  <ActionsButton word={word} />
+                ) : (
+                  <AddOthersWordButton wordId={word._id} wordEn={word.en} />
+                )}
               </td>
             </tr>
           ))}

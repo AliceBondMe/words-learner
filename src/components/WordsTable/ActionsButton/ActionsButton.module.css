@@ -1,0 +1,43 @@
+.popoverBackdrop {
+  z-index: 1200;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: transparent;
+}
+
+.popoverContainer {
+  position: absolute;
+  width: fit-content;
+  padding: 12px 24px;
+  border-radius: 15px;
+  background-color: var(--background-primary);
+  box-shadow: 0px 4px 47px 0px rgba(18, 20, 23, 0.08);
+
+  :global(.zoomIn) {
+    animation: zoomIn 500ms ease-in-out;
+  }
+}
+
+.buttonsWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.button {
+  background-color: transparent;
+  color: var(--text-semitransparent);
+  font-weight: 600;
+  transition: color var(--transition-main);
+}
+
+.button:hover {
+  color: var(--text-primary);
+}
+
+.activeButton {
+  color: var(--text-primary);
+}

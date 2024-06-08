@@ -4,12 +4,15 @@ import { WordsState } from "../types";
 import {
   addNewWord,
   addOthersWord,
+  deleteWord,
+  editWord,
   getCategories,
   getOwnWords,
   getRecommendedWords,
 } from "./operations";
 
 const wordsInitialState: WordsState = {
+  wordToEdit: null,
   dictionary: {
     results: [],
     totalPages: 0,
@@ -25,7 +28,11 @@ const wordsInitialState: WordsState = {
 const wordsSlice = createSlice({
   name: "words",
   initialState: wordsInitialState,
-  reducers: {},
+  reducers: {
+    setWordToEditAction(state, action) {
+      state.wordToEdit = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getRecommendedWords.fulfilled, (state, action) => {
       state.recommended.results = action.payload.results;
@@ -43,8 +50,19 @@ const wordsSlice = createSlice({
     builder.addCase(addNewWord.fulfilled, (state, action) => {
       state.dictionary.results.push(action.payload);
     });
+    builder.addCase(editWord.fulfilled, (state, action) => {
+      const editedWordIndex = state.dictionary.results.findIndex(
+        ({ _id }) => _id === action.payload._id
+      );
+      state.dictionary.results[editedWordIndex] = action.payload;
+    });
     builder.addCase(addOthersWord.fulfilled, (state, action) => {
       state.dictionary.results.push(action.payload);
+    });
+    builder.addCase(deleteWord.fulfilled, (state, action) => {
+      state.dictionary.results = state.dictionary.results.filter(
+        ({ _id }) => _id !== action.payload
+      );
     });
     builder.addCase(getRecommendedWords.rejected, (state, action) => {
       state.wordsError = action.payload;
@@ -61,7 +79,14 @@ const wordsSlice = createSlice({
     builder.addCase(addOthersWord.rejected, (state, action) => {
       state.wordsError = action.payload;
     });
+    builder.addCase(editWord.rejected, (state, action) => {
+      state.wordsError = action.payload;
+    });
+    builder.addCase(deleteWord.rejected, (state, action) => {
+      state.wordsError = action.payload;
+    });
   },
 });
 
 export const wordsReducer = wordsSlice.reducer;
+export const { setWordToEditAction } = wordsSlice.actions;

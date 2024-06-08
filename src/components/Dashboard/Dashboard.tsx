@@ -6,9 +6,12 @@ import { Icon } from "../common";
 
 import styles from "./Dashboard.module.css";
 import AddWordButton from "../AddWordButton/AddWordButton";
+import { useSelector } from "react-redux";
+import { selectOwnWords } from "../../redux/words/selectors";
 
 const Dashboard: FC = () => {
   const { pathname } = useLocation();
+  const { results: ownWords } = useSelector(selectOwnWords);
 
   return (
     <div className={styles.container}>
@@ -17,7 +20,7 @@ const Dashboard: FC = () => {
       <div className={styles.actionsBlock}>
         <p className={styles.statWrap}>
           <span className={styles.statText}>To study:</span>{" "}
-          <span className={styles.statValue}>20</span>
+          <span className={styles.statValue}>{ownWords.length}</span>
         </p>
 
         {pathname.includes("dictionary") && <AddWordButton />}
