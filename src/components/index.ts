@@ -8,3 +8,5 @@ export { default as Dashboard } from "./Dashboard/Dashboard";
 export { default as AddWordButton } from "./AddWordButton/AddWordButton";
 export { default as AddWordForm } from "./AddWordForm/AddWordForm";
 export { default as ProgressBar } from "./ProgressBar/ProgressBar";
+export { default as NoTasks } from "./NoTasks/NoTasks";
+export { default as TrainingRoom } from "./TrainingRoom/TrainingRoom";

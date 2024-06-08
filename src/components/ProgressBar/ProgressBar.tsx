@@ -20,7 +20,7 @@ const ProgressBar: FC<ProgressBarProps> = ({
       sx={{
         borderRadius: "100%",
         boxShadow: `inset 0 0 0px ${thickness2}px ${color2}`,
-        color: { color1 },
+        color: `${color1} !important`,
       }}
     />
   );

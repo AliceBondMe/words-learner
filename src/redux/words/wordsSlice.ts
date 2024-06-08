@@ -9,9 +9,13 @@ import {
   getCategories,
   getOwnWords,
   getRecommendedWords,
+  getTasks,
+  sendAnswers,
 } from "./operations";
 
 const wordsInitialState: WordsState = {
+  tasks: [],
+  checkedAnswers: [],
   wordToEdit: null,
   dictionary: {
     results: [],
@@ -64,6 +68,12 @@ const wordsSlice = createSlice({
         ({ _id }) => _id !== action.payload
       );
     });
+    builder.addCase(getTasks.fulfilled, (state, action) => {
+      state.tasks = action.payload.tasks;
+    });
+    builder.addCase(sendAnswers.fulfilled, (state, action) => {
+      state.checkedAnswers = action.payload;
+    });
     builder.addCase(getRecommendedWords.rejected, (state, action) => {
       state.wordsError = action.payload;
     });
@@ -83,6 +93,12 @@ const wordsSlice = createSlice({
       state.wordsError = action.payload;
     });
     builder.addCase(deleteWord.rejected, (state, action) => {
+      state.wordsError = action.payload;
+    });
+    builder.addCase(getTasks.rejected, (state, action) => {
+      state.wordsError = action.payload;
+    });
+    builder.addCase(sendAnswers.rejected, (state, action) => {
       state.wordsError = action.payload;
     });
   },

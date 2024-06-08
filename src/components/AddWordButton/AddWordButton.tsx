@@ -1,13 +1,23 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 
 import { Icon, Modal } from "../common";
 import { useShowModal } from "../../hooks/useShowModal";
+import AddWordForm from "../AddWordForm/AddWordForm";
+import { useLocation } from "react-router";
 
 import styles from "./AddWordButton.module.css";
-import AddWordForm from "../AddWordForm/AddWordForm";
 
 const AddWordButton: FC = () => {
   const { isShowModal, openModal, closeModal } = useShowModal();
+  const { state } = useLocation();
+  const [modalOpened, setModalOpened] = useState(false);
+
+  useEffect(() => {
+    if (!modalOpened && state?.from?.pathname.includes("training")) {
+      openModal();
+      setModalOpened(true);
+    }
+  }, [state, openModal, modalOpened]);
 
   return (
     <>

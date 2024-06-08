@@ -7,6 +7,8 @@ import { selectOwnWords } from "../../redux/words/selectors";
 import { useGetWordsSearchParams } from "../../hooks/useGetWordsSearchParams";
 import { Dashboard, WordsPagination, WordsTable } from "../../components";
 
+import styles from "../RecommendPage/RecommendPage.module.css";
+
 const DictionaryPage: FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const { results: ownWords, totalPages } = useSelector(selectOwnWords);
@@ -21,7 +23,7 @@ const DictionaryPage: FC = () => {
   }, [dispatch, wordsSearchParams]);
 
   return (
-    <div>
+    <div className={styles.container}>
       <Dashboard />
       <WordsTable wordsList={ownWords} />
       {totalPages > 1 && <WordsPagination totalPages={totalPages} />}

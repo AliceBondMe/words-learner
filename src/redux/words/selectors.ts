@@ -6,3 +6,4 @@ export const selectOwnWords = (state: RootState) => state.words.dictionary;
 export const selectWordsCategories = (state: RootState) =>
   state.words.categories;
 export const selectWordsToEdit = (state: RootState) => state.words.wordToEdit;
+export const selectTasks = (state: RootState) => state.words.tasks;

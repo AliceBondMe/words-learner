@@ -59,14 +59,6 @@ export interface AllWordsResponse {
   totalPages: number;
 }
 
-export interface WordsState {
-  wordToEdit: AddNewWordResponse | null;
-  categories: string[];
-  dictionary: OwnWordsResponse;
-  recommended: AllWordsResponse;
-  wordsError: ErrorResponse | null | undefined;
-}
-
 export interface NewWordData {
   en: string;
   ua: string;
@@ -92,4 +84,43 @@ export interface EditedWordData {
     category: string;
     isIrregular: boolean;
   };
+}
+
+export interface TasksResponse {
+  tasks: {
+    _id: string;
+    ua?: string;
+    en?: string;
+    task: "ua" | "en";
+  }[];
+}
+
+export interface AnswerData {
+  _id: string;
+  en: string;
+  ua: string;
+  task: "en" | "ua";
+}
+
+export interface AnswerResponse {
+  _id: string;
+  ua: string;
+  task: "en" | "ua";
+  en: string;
+  isDone: boolean;
+}
+
+export interface WordsState {
+  tasks: {
+    _id: string;
+    ua?: string;
+    en?: string;
+    task: "ua" | "en";
+  }[];
+  checkedAnswers: AnswerResponse[];
+  wordToEdit: AddNewWordResponse | null;
+  categories: string[];
+  dictionary: OwnWordsResponse;
+  recommended: AllWordsResponse;
+  wordsError: ErrorResponse | null | undefined;
 }

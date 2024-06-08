@@ -4,10 +4,13 @@ import axios from "axios";
 import {
   AddNewWordResponse,
   AllWordsResponse,
+  AnswerData,
+  AnswerResponse,
   EditedWordData,
   ErrorResponse,
   NewWordData,
   OwnWordsResponse,
+  TasksResponse,
   WordsRequestParams,
 } from "../types";
 
@@ -152,6 +155,47 @@ export const deleteWord = createAsyncThunk<
   try {
     await axios.delete<AddNewWordResponse>(`/words/delete/${wordId}`);
     return wordId;
+  } catch (error) {
+    let errorMessage = "An unknown error occurred";
+    if (axios.isAxiosError(error) && error.response) {
+      errorMessage = error.response.data.message || error.message;
+    } else if (error instanceof Error) {
+      errorMessage = error.message;
+    }
+    return thunkAPI.rejectWithValue({ message: errorMessage });
+  }
+});
+
+export const getTasks = createAsyncThunk<
+  TasksResponse,
+  void,
+  { rejectValue: ErrorResponse }
+>("words/getTasks", async (_, thunkAPI) => {
+  try {
+    const response = await axios.get<TasksResponse>("/words/tasks");
+    return response.data;
+  } catch (error) {
+    let errorMessage = "An unknown error occurred";
+    if (axios.isAxiosError(error) && error.response) {
+      errorMessage = error.response.data.message || error.message;
+    } else if (error instanceof Error) {
+      errorMessage = error.message;
+    }
+    return thunkAPI.rejectWithValue({ message: errorMessage });
+  }
+});
+
+export const sendAnswers = createAsyncThunk<
+  AnswerResponse[],
+  AnswerData[],
+  { rejectValue: ErrorResponse }
+>("words/sendAnswers", async (answersData: AnswerData[], thunkAPI) => {
+  try {
+    const response = await axios.post<AnswerResponse[]>(
+      "/words/answers",
+      answersData
+    );
+    return response.data;
   } catch (error) {
     let errorMessage = "An unknown error occurred";
     if (axios.isAxiosError(error) && error.response) {

@@ -11,10 +11,10 @@ import { validationSchemaAddWord } from "./validationSchema";
 import { AddWordFormProps, WordData } from "./types";
 import { selectWordsCategories } from "../../redux/words/selectors";
 import { Icon } from "../common";
-
-import styles from "./AddWordForm.module.css";
 import { addNewWord } from "../../redux/words/operations";
 import { useSearchParams } from "react-router-dom";
+
+import styles from "./AddWordForm.module.css";
 
 const AddWordForm: FC<AddWordFormProps> = ({ closeModal }) => {
   const options = useSelector(selectWordsCategories);

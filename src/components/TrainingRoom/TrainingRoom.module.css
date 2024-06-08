@@ -1,0 +1,93 @@
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  width: 100%;
+  height: 806px;
+  border-radius: 8px;
+  background-color: var(--text-contrast);
+  margin-bottom: 116px;
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 50%;
+  padding: 22px;
+}
+
+.firstBlock {
+  height: 50%;
+  border-bottom: 1px solid var(--background-tertiary);
+  padding: 22px;
+}
+
+.bottomPart {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.languageWrap {
+  display: flex;
+  align-items: center;
+  align-self: end;
+  gap: 8px;
+}
+
+.language {
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 4px;
+}
+
+.nextButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0;
+  background-color: transparent;
+  color: var(--text-semitransparent);
+  transition: color var(--transition-main);
+}
+
+.nextButton:hover {
+  color: var(--accent-primary);
+}
+
+.nextText {
+  font-weight: 500;
+  margin-top: 4px;
+}
+
+.taskText {
+  font-weight: 500;
+}
+
+.input {
+  font-weight: 500;
+  background-color: transparent;
+  border: none;
+}
+
+.input::placeholder {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.errorMessage {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--error);
+  font-size: 14px;
+}
+
+.button:disabled {
+  background-color: var(--text-semitransparent);
+  cursor: not-allowed;
+}
