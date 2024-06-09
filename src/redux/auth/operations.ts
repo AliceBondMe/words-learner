@@ -8,6 +8,7 @@ import {
   UserData,
 } from "../types";
 import { RootState } from "../store";
+import { handleError } from "../helpers";
 
 export const registerUser = createAsyncThunk<
   AuthResponse,
@@ -19,12 +20,7 @@ export const registerUser = createAsyncThunk<
     setAuthHeader(response.data.token);
     return response.data;
   } catch (error) {
-    let errorMessage = "An unknown error occurred";
-    if (axios.isAxiosError(error) && error.response) {
-      errorMessage = error.response.data.message || error.message;
-    } else if (error instanceof Error) {
-      errorMessage = error.message;
-    }
+    const errorMessage = handleError(error);
     return thunkAPI.rejectWithValue({ message: errorMessage });
   }
 });
@@ -39,12 +35,7 @@ export const loginUser = createAsyncThunk<
     setAuthHeader(response.data.token);
     return response.data;
   } catch (error) {
-    let errorMessage = "An unknown error occurred";
-    if (axios.isAxiosError(error) && error.response) {
-      errorMessage = error.response.data.message || error.message;
-    } else if (error instanceof Error) {
-      errorMessage = error.message;
-    }
+    const errorMessage = handleError(error);
     return thunkAPI.rejectWithValue({ message: errorMessage });
   }
 });
@@ -66,12 +57,7 @@ export const refreshUser = createAsyncThunk<
     const response = await axios.get<AuthResponse>("/users/current");
     return response.data;
   } catch (error) {
-    let errorMessage = "An unknown error occurred";
-    if (axios.isAxiosError(error) && error.response) {
-      errorMessage = error.response.data.message || error.message;
-    } else if (error instanceof Error) {
-      errorMessage = error.message;
-    }
+    const errorMessage = handleError(error);
     return thunkAPI.rejectWithValue({ message: errorMessage });
   }
 });
@@ -86,12 +72,7 @@ export const logoutUser = createAsyncThunk<
     clearAuthHeader();
     return response.data;
   } catch (error) {
-    let errorMessage = "An unknown error occurred";
-    if (axios.isAxiosError(error) && error.response) {
-      errorMessage = error.response.data.message || error.message;
-    } else if (error instanceof Error) {
-      errorMessage = error.message;
-    }
+    const errorMessage = handleError(error);
     return thunkAPI.rejectWithValue({ message: errorMessage });
   }
 });

@@ -110,6 +110,10 @@ export interface AnswerResponse {
   isDone: boolean;
 }
 
+export interface StatisticsResponse {
+  totalCount: number;
+}
+
 export interface WordsState {
   tasks: {
     _id: string;
@@ -117,6 +121,7 @@ export interface WordsState {
     en?: string;
     task: "ua" | "en";
   }[];
+  wordsToStudy: number;
   checkedAnswers: AnswerResponse[];
   wordToEdit: AddNewWordResponse | null;
   categories: string[];

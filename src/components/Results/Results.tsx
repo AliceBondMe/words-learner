@@ -7,6 +7,7 @@ import book_2x from "../../assets/images/book-2x.png";
 import { selectCheckedAnswers } from "../../redux/words/selectors";
 
 import styles from "./Results.module.css";
+import { nanoid } from "@reduxjs/toolkit";
 
 const Results: FC = () => {
   const results = useSelector(selectCheckedAnswers);
@@ -27,8 +28,8 @@ const Results: FC = () => {
             </p>
           ) : (
             <ul>
-              {correct.map(({ _id, en, ua, task }) => (
-                <li key={_id} className={styles.word}>
+              {correct.map(({ en, ua, task }) => (
+                <li key={nanoid()} className={styles.word}>
                   {task === "en" ? ua : en}
                 </li>
               ))}
@@ -46,8 +47,8 @@ const Results: FC = () => {
               </p>
             ) : (
               <ul>
-                {mistakes.map(({ _id, en, ua, task }) => (
-                  <li key={_id} className={styles.word}>
+                {mistakes.map(({ en, ua, task }) => (
+                  <li key={nanoid()} className={styles.word}>
                     {task === "en" ? ua : en}
                   </li>
                 ))}

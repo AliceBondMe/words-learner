@@ -1,17 +1,28 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 
 import Filters from "./Filters/Filters";
 import { Icon } from "../common";
+import AddWordButton from "../AddWordButton/AddWordButton";
+import {
+  selectOwnWords,
+  selectWordsToStudy,
+} from "../../redux/words/selectors";
+import { AppDispatch } from "../../redux/store";
 
 import styles from "./Dashboard.module.css";
-import AddWordButton from "../AddWordButton/AddWordButton";
-import { useSelector } from "react-redux";
-import { selectOwnWords } from "../../redux/words/selectors";
+import { getStatistics } from "../../redux/words/operations";
 
 const Dashboard: FC = () => {
   const { pathname } = useLocation();
+  const dispatch: AppDispatch = useDispatch();
   const { results: ownWords } = useSelector(selectOwnWords);
+  const wordsToStudy = useSelector(selectWordsToStudy);
+
+  useEffect(() => {
+    dispatch(getStatistics());
+  }, [dispatch, ownWords]);
 
   return (
     <div className={styles.container}>
@@ -20,7 +31,7 @@ const Dashboard: FC = () => {
       <div className={styles.actionsBlock}>
         <p className={styles.statWrap}>
           <span className={styles.statText}>To study:</span>{" "}
-          <span className={styles.statValue}>{ownWords.length}</span>
+          <span className={styles.statValue}>{wordsToStudy}</span>
         </p>
 
         {pathname.includes("dictionary") && <AddWordButton />}

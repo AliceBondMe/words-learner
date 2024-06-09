@@ -10,9 +10,11 @@ import {
   ErrorResponse,
   NewWordData,
   OwnWordsResponse,
+  StatisticsResponse,
   TasksResponse,
   WordsRequestParams,
 } from "../types";
+import { handleError } from "../helpers";
 
 export const getCategories = createAsyncThunk<
   string[],
@@ -23,12 +25,7 @@ export const getCategories = createAsyncThunk<
     const response = await axios.get<string[]>("/words/categories");
     return response.data;
   } catch (error) {
-    let errorMessage = "An unknown error occurred";
-    if (axios.isAxiosError(error) && error.response) {
-      errorMessage = error.response.data.message || error.message;
-    } else if (error instanceof Error) {
-      errorMessage = error.message;
-    }
+    const errorMessage = handleError(error);
     return thunkAPI.rejectWithValue({ message: errorMessage });
   }
 });
@@ -46,12 +43,7 @@ export const getRecommendedWords = createAsyncThunk<
       });
       return response.data;
     } catch (error) {
-      let errorMessage = "An unknown error occurred";
-      if (axios.isAxiosError(error) && error.response) {
-        errorMessage = error.response.data.message || error.message;
-      } else if (error instanceof Error) {
-        errorMessage = error.message;
-      }
+      const errorMessage = handleError(error);
       return thunkAPI.rejectWithValue({ message: errorMessage });
     }
   }
@@ -70,12 +62,7 @@ export const getOwnWords = createAsyncThunk<
       });
       return response.data;
     } catch (error) {
-      let errorMessage = "An unknown error occurred";
-      if (axios.isAxiosError(error) && error.response) {
-        errorMessage = error.response.data.message || error.message;
-      } else if (error instanceof Error) {
-        errorMessage = error.message;
-      }
+      const errorMessage = handleError(error);
       return thunkAPI.rejectWithValue({ message: errorMessage });
     }
   }
@@ -93,12 +80,7 @@ export const addNewWord = createAsyncThunk<
     );
     return response.data;
   } catch (error) {
-    let errorMessage = "An unknown error occurred";
-    if (axios.isAxiosError(error) && error.response) {
-      errorMessage = error.response.data.message || error.message;
-    } else if (error instanceof Error) {
-      errorMessage = error.message;
-    }
+    const errorMessage = handleError(error);
     return thunkAPI.rejectWithValue({ message: errorMessage });
   }
 });
@@ -114,12 +96,7 @@ export const addOthersWord = createAsyncThunk<
     );
     return response.data;
   } catch (error) {
-    let errorMessage = "An unknown error occurred";
-    if (axios.isAxiosError(error) && error.response) {
-      errorMessage = error.response.data.message || error.message;
-    } else if (error instanceof Error) {
-      errorMessage = error.message;
-    }
+    const errorMessage = handleError(error);
     return thunkAPI.rejectWithValue({ message: errorMessage });
   }
 });
@@ -137,12 +114,7 @@ export const editWord = createAsyncThunk<
     );
     return response.data;
   } catch (error) {
-    let errorMessage = "An unknown error occurred";
-    if (axios.isAxiosError(error) && error.response) {
-      errorMessage = error.response.data.message || error.message;
-    } else if (error instanceof Error) {
-      errorMessage = error.message;
-    }
+    const errorMessage = handleError(error);
     return thunkAPI.rejectWithValue({ message: errorMessage });
   }
 });
@@ -156,12 +128,7 @@ export const deleteWord = createAsyncThunk<
     await axios.delete<AddNewWordResponse>(`/words/delete/${wordId}`);
     return wordId;
   } catch (error) {
-    let errorMessage = "An unknown error occurred";
-    if (axios.isAxiosError(error) && error.response) {
-      errorMessage = error.response.data.message || error.message;
-    } else if (error instanceof Error) {
-      errorMessage = error.message;
-    }
+    const errorMessage = handleError(error);
     return thunkAPI.rejectWithValue({ message: errorMessage });
   }
 });
@@ -175,12 +142,21 @@ export const getTasks = createAsyncThunk<
     const response = await axios.get<TasksResponse>("/words/tasks");
     return response.data;
   } catch (error) {
-    let errorMessage = "An unknown error occurred";
-    if (axios.isAxiosError(error) && error.response) {
-      errorMessage = error.response.data.message || error.message;
-    } else if (error instanceof Error) {
-      errorMessage = error.message;
-    }
+    const errorMessage = handleError(error);
+    return thunkAPI.rejectWithValue({ message: errorMessage });
+  }
+});
+
+export const getStatistics = createAsyncThunk<
+  StatisticsResponse,
+  void,
+  { rejectValue: ErrorResponse }
+>("words/getStatistics", async (_, thunkAPI) => {
+  try {
+    const response = await axios.get<StatisticsResponse>("/words/statistics");
+    return response.data;
+  } catch (error) {
+    const errorMessage = handleError(error);
     return thunkAPI.rejectWithValue({ message: errorMessage });
   }
 });
@@ -197,12 +173,7 @@ export const sendAnswers = createAsyncThunk<
     );
     return response.data;
   } catch (error) {
-    let errorMessage = "An unknown error occurred";
-    if (axios.isAxiosError(error) && error.response) {
-      errorMessage = error.response.data.message || error.message;
-    } else if (error instanceof Error) {
-      errorMessage = error.message;
-    }
+    const errorMessage = handleError(error);
     return thunkAPI.rejectWithValue({ message: errorMessage });
   }
 });

@@ -1,4 +1,8 @@
 .container {
+  @media screen and (max-width: 374px) {
+    width: 300px;
+  }
+
   @media screen and (min-width: 768px) {
     width: 400px;
   }
@@ -70,6 +74,10 @@
   width: 152px;
   height: 121px;
   object-fit: cover;
+
+  @media screen and (max-width: 374px) {
+    width: 120px;
+  }
 
   @media screen and (min-width: 768px) {
     width: 212px;

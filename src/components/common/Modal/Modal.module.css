@@ -41,6 +41,10 @@
     margin: 12px 0px;
   }
 
+  @media screen and (max-width: 374px) {
+    padding: 48px 10px;
+  }
+
   @media screen and (min-width: 768px) {
     padding: 48px 64px;
   }

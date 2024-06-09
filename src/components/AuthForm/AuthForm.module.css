@@ -2,6 +2,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media screen and (max-width: 374px) {
+    width: 280px;
+  }
 }
 
 .formHeader {

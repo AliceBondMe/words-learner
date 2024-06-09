@@ -7,6 +7,8 @@ export const selectWordsCategories = (state: RootState) =>
   state.words.categories;
 export const selectWordsToEdit = (state: RootState) => state.words.wordToEdit;
 export const selectTasks = (state: RootState) => state.words.tasks;
+export const selectWordsToStudy = (state: RootState) =>
+  state.words.wordsToStudy;
 export const selectCheckedAnswers = (state: RootState) =>
   state.words.checkedAnswers;
 export const selectWordsError = (state: RootState) => state.words.wordsError;

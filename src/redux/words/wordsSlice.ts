@@ -9,6 +9,7 @@ import {
   getCategories,
   getOwnWords,
   getRecommendedWords,
+  getStatistics,
   getTasks,
   sendAnswers,
 } from "./operations";
@@ -16,6 +17,7 @@ import {
 const wordsInitialState: WordsState = {
   tasks: [],
   checkedAnswers: [],
+  wordsToStudy: 0,
   wordToEdit: null,
   dictionary: {
     results: [],
@@ -75,6 +77,10 @@ const wordsSlice = createSlice({
     });
     builder.addCase(getTasks.fulfilled, (state, action) => {
       state.tasks = action.payload.tasks;
+      state.wordsError = null;
+    });
+    builder.addCase(getStatistics.fulfilled, (state, action) => {
+      state.wordsToStudy = action.payload.totalCount;
       state.wordsError = null;
     });
     builder.addCase(sendAnswers.fulfilled, (state, action) => {
