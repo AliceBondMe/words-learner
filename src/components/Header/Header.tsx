@@ -10,6 +10,7 @@ import UserBar from "./UserBar/UserBar";
 import UserNav from "./UserNav/UserNav";
 import LogoutButton from "./LogoutButton/LogoutButton";
 import MobileMenu from "./MobileMenu/MobileMenu";
+import { useIsSmallMobile } from "../../hooks/useIsSmallMobile";
 
 import styles from "./Header.module.css";
 
@@ -19,6 +20,7 @@ const Header: FC = () => {
   const [isMobileMenulOpen, setIsMobileMenulOpen] = useState(false);
   const [isAuthPage, setIsAuthPage] = useState(false);
   const isLoggedIn = useSelector(selectIsLoggedIn);
+  const { isSmallMobile } = useIsSmallMobile();
 
   const handleResize = () => {
     window.innerWidth < 1440 ? setIsMobile(true) : setIsMobile(false);
@@ -64,7 +66,7 @@ const Header: FC = () => {
 
       {isLoggedIn && isMobile ? (
         <div className={styles.userMenuBlock}>
-          <UserBar />
+          {!isSmallMobile && <UserBar />}
           <button
             type="button"
             aria-label="Open menu"

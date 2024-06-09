@@ -7,11 +7,13 @@ import { AppDispatch } from "../../redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import { getTasks } from "../../redux/words/operations";
 import { selectTasks } from "../../redux/words/selectors";
+import { useIsNotMobile } from "../../hooks/useIsNotMobile";
 
 const TrainingPage: FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const tasks = useSelector(selectTasks);
   const [numberOfDoneTasks, setNumberOfDoneTasks] = useState(0);
+  const { isNotMobile } = useIsNotMobile();
 
   useEffect(() => {
     dispatch(getTasks());
@@ -32,7 +34,7 @@ const TrainingPage: FC = () => {
               color2="var(--background-primary)"
               thickness1={4}
               thickness2={4}
-              size="44px"
+              size={isNotMobile ? "58px" : "44px"}
             />
             <span className={styles.wordsNumber}>{tasks?.length}</span>
           </div>

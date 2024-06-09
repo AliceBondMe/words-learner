@@ -2,6 +2,10 @@
   display: flex;
   flex-direction: column;
   width: 311px;
+
+  @media screen and (min-width: 768px) {
+    width: 500px;
+  }
 }
 
 .header {
@@ -10,10 +14,20 @@
   line-height: 1.17;
   letter-spacing: -0.48px;
   margin-bottom: 16px;
+
+  @media screen and (min-width: 768px) {
+    font-size: 40px;
+    margin-bottom: 20px;
+  }
 }
 
 .instructions {
   margin-bottom: 16px;
+
+  @media screen and (min-width: 768px) {
+    font-size: 20px;
+    margin-bottom: 32px;
+  }
 }
 
 .selectWrap {
@@ -38,6 +52,10 @@
   text-transform: capitalize;
   cursor: pointer;
   transition: background-color var(--transition-main);
+
+  @media screen and (min-width: 768px) {
+    width: 220px;
+  }
 }
 
 .selectActive {
@@ -71,6 +89,10 @@
   &::-webkit-scrollbar-track {
     margin: 12px 0;
   }
+
+  @media screen and (min-width: 768px) {
+    width: 220px;
+  }
 }
 
 .option {
@@ -86,10 +108,18 @@
 
 .radioBlockWrap {
   margin-bottom: 8px;
+
+  @media screen and (min-width: 768px) {
+    margin-bottom: 16px;
+  }
 }
 
 .radioBlockWrapOpt {
   margin-bottom: 16px;
+
+  @media screen and (min-width: 768px) {
+    margin-bottom: 38px;
+  }
 }
 
 .radioGroup {
@@ -106,6 +136,10 @@
 .label {
   font-size: 12px;
   padding-top: 4px;
+
+  @media screen and (min-width: 768px) {
+    font-size: 16px;
+  }
 }
 
 .radio {
@@ -114,6 +148,11 @@
   border-radius: 10px;
   border: 2px solid var(--text-contrast);
   appearance: none;
+
+  @media screen and (min-width: 768px) {
+    width: 20px;
+    height: 20px;
+  }
 }
 
 .radio:checked {
@@ -128,6 +167,10 @@
   margin-bottom: 16px;
   font-size: 10px;
   line-height: 1.2;
+
+  @media screen and (min-width: 768px) {
+    font-size: 12px;
+  }
 }
 
 .languageLabel {
@@ -137,6 +180,27 @@
   font-size: 14px;
   font-weight: 500;
   margin-bottom: 8px;
+
+  @media screen and (min-width: 768px) {
+    font-size: 16px;
+  }
+}
+
+.languageLabel svg {
+  @media screen and (min-width: 768px) {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+.inputAndLabelWrap {
+  @media screen and (min-width: 768px) {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: start;
+    gap: 32px;
+  }
 }
 
 .inputWrap {
@@ -154,6 +218,11 @@
   background-color: inherit;
   color: var(--text-contrast);
   font-weight: 500;
+
+  @media screen and (min-width: 768px) {
+    width: 297px;
+    padding: 16px 18px;
+  }
 }
 
 .input::placeholder {
@@ -176,6 +245,12 @@
   border: 1px solid transparent;
   background-color: var(--text-contrast);
   transition: all var(--transition-main);
+
+  @media screen and (min-width: 768px) {
+    font-size: 18px;
+    width: 50%;
+    padding: 14px;
+  }
 }
 
 .buttonAdd:hover {
@@ -194,6 +269,12 @@
   background-color: var(--accent-primary);
   color: var(--text-contrast);
   transition: all var(--transition-main);
+
+  @media screen and (min-width: 768px) {
+    font-size: 18px;
+    width: 50%;
+    padding: 14px;
+  }
 }
 
 .buttonCancel:hover {

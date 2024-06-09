@@ -10,3 +10,4 @@ export { default as AddWordForm } from "./AddWordForm/AddWordForm";
 export { default as ProgressBar } from "./ProgressBar/ProgressBar";
 export { default as NoTasks } from "./NoTasks/NoTasks";
 export { default as TrainingRoom } from "./TrainingRoom/TrainingRoom";
+export { default as Results } from "./Results/Results";

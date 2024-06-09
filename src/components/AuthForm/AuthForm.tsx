@@ -11,9 +11,10 @@ import {
   validationSchemaSignin,
   validationSchemaSignup,
 } from "./validationSchema";
-import { Icon } from "../common";
+import { Icon, SnackbarMessage } from "../common";
 import { loginUser, registerUser } from "../../redux/auth/operations";
 import { selectAuthError } from "../../redux/auth/selectors";
+import useSnackbar from "../../hooks/useSnackBar";
 
 import styles from "./AuthForm.module.css";
 
@@ -23,6 +24,8 @@ const AuthForm: FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
   const authError = useSelector(selectAuthError);
+  const { snackbarOpen, handleOpenSnackbar, handleCloseSnackbar } =
+    useSnackbar();
 
   const {
     register,
@@ -46,113 +49,124 @@ const AuthForm: FC = () => {
           if (action.type === "auth/register/fulfilled") {
             navigate("/dictionary");
           } else {
-            alert(authError);
+            handleOpenSnackbar();
           }
         })
       : dispatch(loginUser({ email, password })).then((action) => {
           if (action.type === "auth/login/fulfilled") {
             navigate("/dictionary");
           } else {
-            alert(authError);
+            handleOpenSnackbar();
           }
         });
   };
 
   return (
-    <div className={styles.container}>
-      <h2 className={styles.formHeader}>
-        {pathname.includes("register") ? "Register" : "Login"}
-      </h2>
-      <p className={styles.formText}>
-        {pathname.includes("register")
-          ? "To start using our services, please fill out the registration form below. All fields are mandatory:"
-          : "Please enter your login details to continue using our service:"}
-      </p>
+    <>
+      <div className={styles.container}>
+        <h2 className={styles.formHeader}>
+          {pathname.includes("register") ? "Register" : "Login"}
+        </h2>
+        <p className={styles.formText}>
+          {pathname.includes("register")
+            ? "To start using our services, please fill out the registration form below. All fields are mandatory:"
+            : "Please enter your login details to continue using our service:"}
+        </p>
 
-      <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-        {pathname.includes("register") && (
+        <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+          {pathname.includes("register") && (
+            <div>
+              <input
+                {...register("name")}
+                placeholder="Name"
+                className={
+                  errors.name
+                    ? `${styles.input} ${styles.inputInvalid}`
+                    : `${styles.input}`
+                }
+              />
+              <p className={styles.errorMessage}>
+                {errors.name && <MdError size={16} />} {errors.name?.message}
+              </p>
+            </div>
+          )}
+
           <div>
             <input
-              {...register("name")}
-              placeholder="Name"
+              type="email"
+              {...register("email")}
+              placeholder="Email"
               className={
-                errors.name
+                errors.email
                   ? `${styles.input} ${styles.inputInvalid}`
                   : `${styles.input}`
               }
             />
             <p className={styles.errorMessage}>
-              {errors.name && <MdError size={16} />} {errors.name?.message}
+              {errors.email && <MdError size={16} />} {errors.email?.message}
             </p>
           </div>
-        )}
 
-        <div>
-          <input
-            type="email"
-            {...register("email")}
-            placeholder="Email"
-            className={
-              errors.email
-                ? `${styles.input} ${styles.inputInvalid}`
-                : `${styles.input}`
-            }
-          />
-          <p className={styles.errorMessage}>
-            {errors.email && <MdError size={16} />} {errors.email?.message}
-          </p>
-        </div>
+          <div>
+            <div className={styles.passwordContainer}>
+              <input
+                type={isShowPassword ? "text" : "password"}
+                {...register("password")}
+                placeholder="Password"
+                className={
+                  errors.password
+                    ? `${styles.input} ${styles.inputInvalid}`
+                    : `${styles.input}`
+                }
+              />
 
-        <div>
-          <div className={styles.passwordContainer}>
-            <input
-              type={isShowPassword ? "text" : "password"}
-              {...register("password")}
-              placeholder="Password"
-              className={
-                errors.password
-                  ? `${styles.input} ${styles.inputInvalid}`
-                  : `${styles.input}`
-              }
-            />
+              <button
+                type="button"
+                aria-label="show password"
+                onClick={() => setIsShowPassword((prev) => !prev)}
+                className={styles.showPasswordBtn}
+              >
+                {isShowPassword ? (
+                  <Icon
+                    name="icon-eye_off"
+                    width={20}
+                    height={20}
+                    fill="transparent"
+                    stroke="var(--text-primary)"
+                  />
+                ) : (
+                  <Icon
+                    name="icon-eye"
+                    width={20}
+                    height={20}
+                    fill="transparent"
+                    stroke="var(--text-primary)"
+                  />
+                )}
+              </button>
+            </div>
 
-            <button
-              type="button"
-              aria-label="show password"
-              onClick={() => setIsShowPassword((prev) => !prev)}
-              className={styles.showPasswordBtn}
-            >
-              {isShowPassword ? (
-                <Icon
-                  name="icon-eye_off"
-                  width={20}
-                  height={20}
-                  fill="transparent"
-                  stroke="var(--text-primary)"
-                />
-              ) : (
-                <Icon
-                  name="icon-eye"
-                  width={20}
-                  height={20}
-                  fill="transparent"
-                  stroke="var(--text-primary)"
-                />
-              )}
-            </button>
+            <p className={styles.errorMessage}>
+              {errors.password && <MdError size={16} />}{" "}
+              {errors.password?.message}
+            </p>
           </div>
 
-          <p className={styles.errorMessage}>
-            {errors.password && <MdError size={16} />}{" "}
-            {errors.password?.message}
-          </p>
-        </div>
+          <button type="submit" className={styles.submitBtn}>
+            {pathname.includes("register") ? "Register" : "Login"}
+          </button>
+        </form>
+      </div>
 
-        <button type="submit" className={styles.submitBtn}>
-          {pathname.includes("register") ? "Register" : "Login"}
-        </button>
-      </form>
-    </div>
+      {authError && (
+        <SnackbarMessage
+          message={authError!.message}
+          open={snackbarOpen}
+          onClose={handleCloseSnackbar}
+          severity="error"
+        />
+      )}
+    </>
   );
 };
 

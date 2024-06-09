@@ -1,25 +1,35 @@
 import { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { MdError } from "react-icons/md";
 
 import { AppDispatch } from "../../redux/store";
+import { useShowModal } from "../../hooks/useShowModal";
+import { useIsNotMobile } from "../../hooks/useIsNotMobile";
+import useSnackbar from "../../hooks/useSnackBar";
 import { Answer, Task, TrainingRoomProps } from "./types";
-import { Icon } from "../common";
-import { selectTasks } from "../../redux/words/selectors";
+import { Icon, Modal, SnackbarMessage } from "../common";
+import { selectTasks, selectWordsError } from "../../redux/words/selectors";
 import { sendAnswers } from "../../redux/words/operations";
+import Results from "../Results/Results";
 
 import styles from "./TrainingRoom.module.css";
 import styles2 from "../NoTasks/NoTasks.module.css";
 
 const TrainingRoom: FC<TrainingRoomProps> = ({ handleNumberOfDoneTasks }) => {
+  const dispatch: AppDispatch = useDispatch();
+  const navigate = useNavigate();
   const tasks = useSelector(selectTasks);
   const [inputValue, setInputValue] = useState("");
   const [validationError, setValidationError] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentTask, setCurrentTask] = useState<Task>(tasks[currentIndex]);
   const [answers, setAnswers] = useState<Answer[]>([]);
-  const dispatch: AppDispatch = useDispatch();
+  const { isShowModal, openModal, closeModal } = useShowModal();
+  const { isNotMobile } = useIsNotMobile();
+  const wordsError = useSelector(selectWordsError);
+  const { snackbarOpen, handleOpenSnackbar, handleCloseSnackbar } =
+    useSnackbar();
 
   useEffect(() => {
     setCurrentTask(tasks[currentIndex]);
@@ -79,11 +89,13 @@ const TrainingRoom: FC<TrainingRoomProps> = ({ handleNumberOfDoneTasks }) => {
     const newAnswer = createNewAnswer();
     const updatedAnswers = [...answers, newAnswer];
 
+    handleNumberOfDoneTasks();
+
     dispatch(sendAnswers(updatedAnswers)).then((action) => {
       if (action.type === "words/sendAnswers/fulfilled") {
-        alert("Alles gut");
+        openModal();
       } else {
-        alert("Some error occured");
+        handleOpenSnackbar();
       }
     });
   };
@@ -92,21 +104,36 @@ const TrainingRoom: FC<TrainingRoomProps> = ({ handleNumberOfDoneTasks }) => {
     <>
       <div className={styles.container}>
         <div className={`${styles.block} ${styles.firstBlock}`}>
-          <div>
-            <input
-              type="text"
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
-              placeholder={
-                currentTask.task === "en"
-                  ? "Enter translation"
-                  : "Введіть переклад"
-              }
-              className={styles.input}
-            />
-            {validationError && (
-              <p className={styles.errorMessage}>
-                <MdError size={16} /> {validationError}
+          <div className={styles.topPart}>
+            <div>
+              <input
+                type="text"
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                placeholder={
+                  currentTask.task === "en"
+                    ? "Enter translation"
+                    : "Введіть переклад"
+                }
+                className={styles.input}
+              />
+              {validationError && (
+                <p className={styles.errorMessage}>
+                  <MdError size={16} /> {validationError}
+                </p>
+              )}
+            </div>
+
+            {isNotMobile && (
+              <p className={styles.languageWrap}>
+                <Icon
+                  name={currentTask.task === "en" ? "icon-uk" : "icon-ukraine"}
+                  width={28}
+                  height={28}
+                />
+                <span className={styles.language}>
+                  {currentTask.task === "en" ? "English" : "Ukrainian"}
+                </span>
               </p>
             )}
           </div>
@@ -123,34 +150,54 @@ const TrainingRoom: FC<TrainingRoomProps> = ({ handleNumberOfDoneTasks }) => {
                 />
               </button>
             )}
-            <p className={styles.languageWrap}>
-              <Icon
-                name={currentTask.task === "en" ? "icon-uk" : "icon-ukraine"}
-                width={28}
-                height={28}
-              />
-              <span className={styles.language}>
-                {currentTask.task === "en" ? "English" : "Ukrainian"}
-              </span>
-            </p>
+
+            {!isNotMobile && (
+              <p className={styles.languageWrap}>
+                <Icon
+                  name={currentTask.task === "en" ? "icon-uk" : "icon-ukraine"}
+                  width={28}
+                  height={28}
+                />
+                <span className={styles.language}>
+                  {currentTask.task === "en" ? "English" : "Ukrainian"}
+                </span>
+              </p>
+            )}
           </div>
         </div>
 
         <div className={styles.block}>
-          <p className={styles.taskText}>
-            {currentTask.task === "en" ? currentTask.ua : currentTask.en}
-          </p>
+          <div className={styles.topPart}>
+            <p className={styles.taskText}>
+              {currentTask.task === "en" ? currentTask.ua : currentTask.en}
+            </p>
 
-          <p className={styles.languageWrap}>
-            <Icon
-              name={currentTask.task === "ua" ? "icon-uk" : "icon-ukraine"}
-              width={28}
-              height={28}
-            />
-            <span className={styles.language}>
-              {currentTask.task === "ua" ? "English" : "Ukrainian"}
-            </span>
-          </p>
+            {isNotMobile && (
+              <p className={styles.languageWrap}>
+                <Icon
+                  name={currentTask.task === "ua" ? "icon-uk" : "icon-ukraine"}
+                  width={28}
+                  height={28}
+                />
+                <span className={styles.language}>
+                  {currentTask.task === "ua" ? "English" : "Ukrainian"}
+                </span>
+              </p>
+            )}
+          </div>
+
+          {!isNotMobile && (
+            <p className={styles.languageWrap}>
+              <Icon
+                name={currentTask.task === "ua" ? "icon-uk" : "icon-ukraine"}
+                width={28}
+                height={28}
+              />
+              <span className={styles.language}>
+                {currentTask.task === "ua" ? "English" : "Ukrainian"}
+              </span>
+            </p>
+          )}
         </div>
       </div>
 
@@ -168,6 +215,26 @@ const TrainingRoom: FC<TrainingRoomProps> = ({ handleNumberOfDoneTasks }) => {
           Cancel
         </Link>
       </div>
+
+      {isShowModal && (
+        <Modal
+          closeModal={() => {
+            closeModal();
+            navigate("/dictionary");
+          }}
+        >
+          {<Results />}
+        </Modal>
+      )}
+
+      {wordsError && (
+        <SnackbarMessage
+          message={wordsError!.message}
+          open={snackbarOpen}
+          onClose={handleCloseSnackbar}
+          severity="error"
+        />
+      )}
     </>
   );
 };

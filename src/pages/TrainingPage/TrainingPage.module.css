@@ -7,6 +7,14 @@
   padding: 24px 16px 76px 16px;
   background-color: var(--background-secondary);
   overflow-x: hidden;
+
+  @media screen and (min-width: 768px) {
+    padding: 62px 32px;
+  }
+
+  @media screen and (min-width: 1440px) {
+    padding: 62px 100px;
+  }
 }
 
 .progressWrap {
@@ -17,6 +25,12 @@
 
 .wordsNumber {
   position: absolute;
-  top: 13px;
-  left: 14px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -65%);
+  line-height: 1;
+
+  @media screen and (min-width: 768px) {
+    font-weight: 500;
+  }
 }

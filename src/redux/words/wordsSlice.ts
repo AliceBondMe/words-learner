@@ -50,29 +50,36 @@ const wordsSlice = createSlice({
     });
     builder.addCase(getCategories.fulfilled, (state, action) => {
       state.categories = action.payload;
+      state.wordsError = null;
     });
     builder.addCase(addNewWord.fulfilled, (state, action) => {
       state.dictionary.results.push(action.payload);
+      state.wordsError = null;
     });
     builder.addCase(editWord.fulfilled, (state, action) => {
       const editedWordIndex = state.dictionary.results.findIndex(
         ({ _id }) => _id === action.payload._id
       );
       state.dictionary.results[editedWordIndex] = action.payload;
+      state.wordsError = null;
     });
     builder.addCase(addOthersWord.fulfilled, (state, action) => {
       state.dictionary.results.push(action.payload);
+      state.wordsError = null;
     });
     builder.addCase(deleteWord.fulfilled, (state, action) => {
       state.dictionary.results = state.dictionary.results.filter(
         ({ _id }) => _id !== action.payload
       );
+      state.wordsError = null;
     });
     builder.addCase(getTasks.fulfilled, (state, action) => {
       state.tasks = action.payload.tasks;
+      state.wordsError = null;
     });
     builder.addCase(sendAnswers.fulfilled, (state, action) => {
       state.checkedAnswers = action.payload;
+      state.wordsError = null;
     });
     builder.addCase(getRecommendedWords.rejected, (state, action) => {
       state.wordsError = action.payload;

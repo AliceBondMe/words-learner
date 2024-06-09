@@ -35,9 +35,16 @@ const WordsTable: FC<WordsTableProps> = ({ wordsList }) => {
                 )}
               </div>
             </th>
-            <th className={styles.th}>
-              <span>Category</span>
-            </th>
+            {isNotMobile && isDictionaryPage && (
+              <th className={styles.th}>
+                <span>Category</span>
+              </th>
+            )}
+            {!isDictionaryPage && (
+              <th className={styles.th}>
+                <span>Category</span>
+              </th>
+            )}
             {isDictionaryPage && (
               <th className={styles.th}>
                 <span>Progress</span>
@@ -55,9 +62,16 @@ const WordsTable: FC<WordsTableProps> = ({ wordsList }) => {
               <td className={styles.td}>
                 <span>{word.ua}</span>
               </td>
-              <td className={styles.td}>
-                <span>{word.category}</span>
-              </td>
+              {isNotMobile && isDictionaryPage && (
+                <td className={styles.td}>
+                  <span>{word.category}</span>
+                </td>
+              )}
+              {!isDictionaryPage && (
+                <td className={styles.td}>
+                  <span>{word.category}</span>
+                </td>
+              )}
               {isDictionaryPage && (
                 <td className={styles.td}>
                   <div className={styles.progressWrap}>
@@ -77,7 +91,12 @@ const WordsTable: FC<WordsTableProps> = ({ wordsList }) => {
                   </div>
                 </td>
               )}
-              <td className={`${styles.td} ${styles.tdRight}`}>
+              <td
+                className={`${styles.td} ${
+                  wordsList.indexOf(word) === wordsList.length - 1 &&
+                  styles.tdRight
+                }`}
+              >
                 {isDictionaryPage ? (
                   <ActionsButton word={word} />
                 ) : (

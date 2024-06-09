@@ -1,5 +1,6 @@
 .tableWrapper {
   margin-bottom: 32px;
+  width: 100%;
 
   @media screen and (min-width: 768px) {
     padding: 18px;
@@ -10,30 +11,22 @@
 }
 
 .table {
+  width: 100%;
   border-collapse: collapse;
 }
 
 .th {
-  max-width: 25vw;
   background-color: var(--background-form);
   font-weight: 500;
   padding: 16px;
-  word-wrap: break-word;
 
-  @media screen and (min-width: 768px) {
-    min-width: 180px;
+  @media screen and (max-width: 374px) {
+    font-size: 12px;
+    padding: 12px 4px;
   }
-}
 
-.th:nth-child(3) {
   @media screen and (min-width: 768px) {
-    min-width: 160px;
-  }
-}
-
-.th:last-child {
-  @media screen and (min-width: 768px) {
-    min-width: 148px;
+    font-size: 18px;
   }
 }
 
@@ -59,11 +52,22 @@
 }
 
 .td {
-  max-width: 25vw;
   padding: 16px;
   background-color: var(--text-contrast);
   border-top: 1px solid var(--background-tertiary);
   word-wrap: break-word;
+  font-size: 14px;
+  font-weight: 500;
+
+  @media screen and (max-width: 374px) {
+    font-size: 12px;
+    padding: 12px 4px;
+  }
+
+  @media screen and (min-width: 768px) {
+    padding: 22px;
+    font-size: 18px;
+  }
 }
 
 .headWithIcon {

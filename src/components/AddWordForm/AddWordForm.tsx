@@ -9,10 +9,14 @@ import { IoChevronDownSharp } from "react-icons/io5";
 import { AppDispatch } from "../../redux/store";
 import { validationSchemaAddWord } from "./validationSchema";
 import { AddWordFormProps, WordData } from "./types";
-import { selectWordsCategories } from "../../redux/words/selectors";
-import { Icon } from "../common";
+import {
+  selectWordsCategories,
+  selectWordsError,
+} from "../../redux/words/selectors";
+import { Icon, SnackbarMessage } from "../common";
 import { addNewWord } from "../../redux/words/operations";
 import { useSearchParams } from "react-router-dom";
+import useSnackbar from "../../hooks/useSnackBar";
 
 import styles from "./AddWordForm.module.css";
 
@@ -32,6 +36,9 @@ const AddWordForm: FC<AddWordFormProps> = ({ closeModal }) => {
   const [isShowRadioError, setIsShowRadioError] = useState(false);
   const dispatch: AppDispatch = useDispatch();
   const [, setSearchParams] = useSearchParams();
+  const wordsError = useSelector(selectWordsError);
+  const { snackbarOpen, handleOpenSnackbar, handleCloseSnackbar } =
+    useSnackbar();
 
   const onSelectChange = (value: string) => {
     setSelectedOption(value);
@@ -65,158 +72,173 @@ const AddWordForm: FC<AddWordFormProps> = ({ closeModal }) => {
         closeModal();
         setSearchParams({ page: "1" });
       } else {
-        alert("Some error occured");
+        handleOpenSnackbar();
       }
     });
   };
 
   return (
-    <div className={styles.container}>
-      <h2 className={styles.header}>Add word</h2>
-      <p className={styles.instructions}>
-        Adding a new word to the dictionary is an important step in enriching
-        the language base and expanding the vocabulary.
-      </p>
+    <>
+      <div className={styles.container}>
+        <h2 className={styles.header}>Add word</h2>
+        <p className={styles.instructions}>
+          Adding a new word to the dictionary is an important step in enriching
+          the language base and expanding the vocabulary.
+        </p>
 
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div
-          className={
-            selectedOption === "verb"
-              ? styles.selectWrap
-              : `${styles.selectWrap} ${styles.selectWrapOpt}`
-          }
-        >
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div
-            onClick={toggleDropdown}
             className={
-              isSelectOpen
-                ? `${styles.select} ${styles.selectActive}`
-                : styles.select
+              selectedOption === "verb"
+                ? styles.selectWrap
+                : `${styles.selectWrap} ${styles.selectWrapOpt}`
             }
           >
-            {selectedOption} <IoChevronDownSharp size={20} />
-          </div>
-
-          {isSelectOpen && (
-            <div className={styles.optionsWrap}>
-              {options.map((item) => (
-                <div
-                  key={nanoid()}
-                  data-value={item}
-                  onClick={() => onSelectChange(item)}
-                  className={styles.option}
-                >
-                  {item}
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-
-        {selectedOption === "verb" && (
-          <>
             <div
+              onClick={toggleDropdown}
               className={
-                !isIrregular
-                  ? `${styles.radioBlockWrap} ${styles.radioBlockWrapOpt}`
-                  : styles.radioBlockWrap
+                isSelectOpen
+                  ? `${styles.select} ${styles.selectActive}`
+                  : styles.select
               }
             >
-              <div className={styles.radioGroup}>
-                <div className={styles.radioWrap}>
-                  <input
-                    type="radio"
-                    {...register("isIrregular")}
-                    value="false"
-                    id="regular"
-                    className={styles.radio}
-                  />
-                  <label htmlFor="regular" className={styles.label}>
-                    Regular
-                  </label>
-                </div>
-                <div className={styles.radioWrap}>
-                  <input
-                    type="radio"
-                    {...register("isIrregular")}
-                    value="true"
-                    id="irregular"
-                    className={styles.radio}
-                  />
-                  <label htmlFor="irregular" className={styles.label}>
-                    Irregular
-                  </label>
-                </div>
-              </div>
-
-              {isShowRadioError &&
-                isIrregular !== "true" &&
-                isIrregular !== "false" && (
-                  <p className={styles.errorMessage}>
-                    <MdError size={16} /> "Verb type must be picked"
-                  </p>
-                )}
+              {selectedOption} <IoChevronDownSharp size={20} />
             </div>
 
-            {isIrregular === "true" && (
-              <p className={styles.irregularMessage}>
-                Such data must be entered in the format "I form-II form-III
-                form".
-              </p>
+            {isSelectOpen && (
+              <div className={styles.optionsWrap}>
+                {options.map((item) => (
+                  <div
+                    key={nanoid()}
+                    data-value={item}
+                    onClick={() => onSelectChange(item)}
+                    className={styles.option}
+                  >
+                    {item}
+                  </div>
+                ))}
+              </div>
             )}
-          </>
-        )}
+          </div>
 
-        <p className={styles.languageLabel}>
-          <Icon name="icon-ukraine" width={28} height={28} />
-          <span>Ukrainian</span>
-        </p>
+          {selectedOption === "verb" && (
+            <>
+              <div
+                className={
+                  !isIrregular
+                    ? `${styles.radioBlockWrap} ${styles.radioBlockWrapOpt}`
+                    : styles.radioBlockWrap
+                }
+              >
+                <div className={styles.radioGroup}>
+                  <div className={styles.radioWrap}>
+                    <input
+                      type="radio"
+                      {...register("isIrregular")}
+                      value="false"
+                      id="regular"
+                      className={styles.radio}
+                    />
+                    <label htmlFor="regular" className={styles.label}>
+                      Regular
+                    </label>
+                  </div>
+                  <div className={styles.radioWrap}>
+                    <input
+                      type="radio"
+                      {...register("isIrregular")}
+                      value="true"
+                      id="irregular"
+                      className={styles.radio}
+                    />
+                    <label htmlFor="irregular" className={styles.label}>
+                      Irregular
+                    </label>
+                  </div>
+                </div>
 
-        <div className={styles.inputWrap}>
-          <input
-            {...register("ua")}
-            placeholder="Переклад"
-            className={styles.input}
-          />
-          <p className={styles.errorMessage}>
-            {errors.ua && <MdError size={16} />} {errors.ua?.message}
-          </p>
-        </div>
+                {isShowRadioError &&
+                  isIrregular !== "true" &&
+                  isIrregular !== "false" && (
+                    <p className={styles.errorMessage}>
+                      <MdError size={16} /> "Verb type must be picked"
+                    </p>
+                  )}
+              </div>
 
-        <p className={styles.languageLabel}>
-          <Icon name="icon-uk" width={28} height={28} />
-          <span>English</span>
-        </p>
+              {isIrregular === "true" && (
+                <p className={styles.irregularMessage}>
+                  Such data must be entered in the format "I form-II form-III
+                  form".
+                </p>
+              )}
+            </>
+          )}
 
-        <div className={styles.inputWrap}>
-          <input
-            {...register("en")}
-            placeholder="New word"
-            className={styles.input}
-          />
-          <p className={styles.errorMessage}>
-            {errors.en && <MdError size={16} />} {errors.en?.message}
-          </p>
-        </div>
+          <div className={styles.inputAndLabelWrap}>
+            <p className={styles.languageLabel}>
+              <Icon name="icon-ukraine" width={28} height={28} />
+              <span>Ukrainian</span>
+            </p>
 
-        <div className={styles.buttonsWrap}>
-          <button
-            type="submit"
-            className={styles.buttonAdd}
-            onClick={() => setIsShowRadioError(true)}
-          >
-            Add
-          </button>
-          <button
-            type="button"
-            className={styles.buttonCancel}
-            onClick={closeModal}
-          >
-            Cancel
-          </button>
-        </div>
-      </form>
-    </div>
+            <div className={styles.inputWrap}>
+              <input
+                {...register("ua")}
+                placeholder="Переклад"
+                className={styles.input}
+              />
+              <p className={styles.errorMessage}>
+                {errors.ua && <MdError size={16} />} {errors.ua?.message}
+              </p>
+            </div>
+          </div>
+
+          <div className={styles.inputAndLabelWrap}>
+            <p className={styles.languageLabel}>
+              <Icon name="icon-uk" width={28} height={28} />
+              <span>English</span>
+            </p>
+
+            <div className={styles.inputWrap}>
+              <input
+                {...register("en")}
+                placeholder="New word"
+                className={styles.input}
+              />
+              <p className={styles.errorMessage}>
+                {errors.en && <MdError size={16} />} {errors.en?.message}
+              </p>
+            </div>
+          </div>
+
+          <div className={styles.buttonsWrap}>
+            <button
+              type="submit"
+              className={styles.buttonAdd}
+              onClick={() => setIsShowRadioError(true)}
+            >
+              Add
+            </button>
+            <button
+              type="button"
+              className={styles.buttonCancel}
+              onClick={closeModal}
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+
+      {wordsError && (
+        <SnackbarMessage
+          message={wordsError!.message}
+          open={snackbarOpen}
+          onClose={handleCloseSnackbar}
+          severity="error"
+        />
+      )}
+    </>
   );
 };
 

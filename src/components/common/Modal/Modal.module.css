@@ -21,13 +21,30 @@
   border-radius: 15px;
   background-color: var(--accent-primary);
   color: var(--text-contrast);
+  max-height: 90vh;
+  overflow-y: auto;
 
   :global(.zoomIn) {
     animation: zoomIn 500ms ease-in-out;
   }
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--accent-secondary);
+    border-radius: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    margin: 12px 0px;
+  }
+
+  @media screen and (min-width: 768px) {
+    padding: 48px 64px;
+  }
 }
-
-
 
 .closeButton {
   position: absolute;

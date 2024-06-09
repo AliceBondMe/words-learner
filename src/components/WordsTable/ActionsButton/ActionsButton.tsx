@@ -44,7 +44,7 @@ const ActionsButton: FC<ActionsButtonProps> = ({ word }) => {
       const rect = buttonRef.current.getBoundingClientRect();
       setPopoverStyles({
         top: rect.bottom + 4,
-        left: rect.left - 40,
+        left: rect.left - 90,
       });
     }
     setIsShowPopover(true);
