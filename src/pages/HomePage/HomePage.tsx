@@ -1,6 +1,9 @@
 import { FC } from "react";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 import { AuthNav } from "../../components";
+import { selectIsLoggedIn } from "../../redux/auth/selectors";
 
 import home_desc from "../../assets/images/main-desctop.png";
 import home_desc_2x from "../../assets/images/main-desctop-2x.png";
@@ -10,6 +13,8 @@ import home_mob_2x from "../../assets/images/main-mob-2x.png";
 import styles from "./HomePage.module.css";
 
 const HomePage: FC = () => {
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+
   return (
     <div className={styles.container}>
       <h1 className={styles.header}>
@@ -28,7 +33,14 @@ const HomePage: FC = () => {
           <img src={home_mob} alt="Student girl studying with laptop" />
         </picture>
       </div>
-      <AuthNav />
+
+      {isLoggedIn ? (
+        <Link to="/dictionary" className={styles.link}>
+          Dive into Your Dictionary!
+        </Link>
+      ) : (
+        <AuthNav />
+      )}
     </div>
   );
 };

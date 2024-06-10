@@ -30,3 +30,25 @@
     width: 50%;
   }
 }
+
+.link {
+  border-radius: 15px;
+  background-color: transparent;
+  padding: 12px 24px;
+  color: var(--text-contrast);
+  outline: 2px solid var(--text-contrast);
+  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
+  margin-top: 12px;
+  transition: all var(--transition-main);
+
+  @media screen and (min-width: 1440px) {
+    font-size: 20px;
+  }
+}
+
+.link:hover {
+  color: var(--text-primary);
+  background-color: var(--text-contrast);
+}
